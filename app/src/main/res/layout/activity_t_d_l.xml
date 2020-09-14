@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TDL"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:elevation="10dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Treino"
+            android:textSize="40sp"/>
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0km"
+        android:id="@+id/distanciaH1"
+        android:textSize="80sp"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00:00"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0s"
+            android:layout_marginHorizontal="70dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00 km/h"
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_play"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latitude:Longitude"
+            android:layout_gravity="center"
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_pause"/>
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_stop"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:drawableRight="@drawable/ic_map"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Simulador"
+            android:id="@+id/simuladorbtn"
+            android:textColor="@color/colorPrimary"
+            android:background="@color/Preto"/>
+        <Button
+            android:drawableRight="@drawable/ic_perfil"
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Perfil"
+            android:id="@+id/perfilbtn"
+            android:textColor="@color/colorPrimary"
+            android:background="@color/Preto"/>
+        <Button
+            android:drawableRight="@drawable/ic_close"
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Sair"
+            android:id="@+id/sairbtn"
+            android:textColor="@color/colorPrimary"
+            android:background="@color/Vermelho"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CamDia</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="entrar">Entrar</string>
+    <string name="sair">Sair</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="login">Login</string>
+    <string name="senha">Senha</string>
+    <string name=""></string>
+
+
+</resources>
