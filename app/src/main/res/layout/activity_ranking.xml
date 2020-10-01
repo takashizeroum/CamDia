@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="Ranking"
             android:padding="5dp"
-            android:textAlignment="textEnd"
+            android:gravity="end"
             android:textSize="40sp"
             />
 
