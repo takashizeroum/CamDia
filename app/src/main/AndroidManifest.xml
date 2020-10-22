@@ -17,9 +17,12 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Historico"></activity>
         <activity android:name=".Ranking" />
-        <activity android:name=".User" />
+        <activity android:name=".User" ></activity>
         <activity android:name=".Login" />
-        <activity android:name=".Splash" />
+        <activity android:name=".Splash" >
+
+        </activity>
+
         <activity android:name=".TDL" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -41,6 +44,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
         </activity>
     </application>
 

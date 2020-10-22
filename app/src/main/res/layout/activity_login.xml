@@ -27,12 +27,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:labelFor="@id/txtLogin"
+        android:labelFor="@id/txtlogLogin"
         android:text="@string/login"
         android:textColor="@color/Preto" />
 
     <EditText
-        android:id="@+id/txtLogin"
+        android:id="@+id/txtlogLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableRight="@drawable/ic_help"
@@ -44,12 +44,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:labelFor="@id/txtSenha"
+        android:labelFor="@id/txtlogSenha"
         android:text="@string/senha"
         android:textColor="@color/Preto" />
 
     <EditText
-        android:id="@+id/txtSenha"
+        android:id="@+id/txtlogSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
@@ -68,7 +68,6 @@
             android:layout_margin="20dp"
             android:background="@color/colorAccent"
             android:text="@string/entrar"
-
             android:textColor="@color/colorPrimary" />
 
 

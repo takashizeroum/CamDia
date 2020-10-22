@@ -61,10 +61,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="350dp"
         android:orientation="vertical">
 
-        <include layout="@layout/activity_maps"/>
+        <include layout="@layout/activity_maps" />
 
     </LinearLayout>
 
@@ -96,6 +96,7 @@
         android:layout_height="wrap_content"
         android:padding="3dp"
         android:orientation="vertical"
+
         >
 
         <Button

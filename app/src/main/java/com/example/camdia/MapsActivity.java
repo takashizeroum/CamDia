@@ -61,17 +61,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onLocationChanged(@NonNull Location location) {
                 Log.d("Localização", "onLocationChanged: " + location.toString());
 
+
                 Double latitude = location.getLatitude();
                 Double longitude = location.getLongitude();
 
+                Double varEx =-23.571749 ;
+                Double varEx2 =-46.4843544 ;
+
                 mMap.clear();
                 Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+
                 try {
                     List<Address> listaEndereco = geocoder.getFromLocation(latitude, longitude, 1);
-
-                    String enderecoLocal = "Av. Feliciano Correia, s/n - Jardim Satelite, São Paulo - SP, 04815-240";
-                    //List<Address> listaEndereco = geocoder.getFromLocationName(enderecoLocal, 1);
-
 
                     if (listaEndereco != null && listaEndereco.size() > 0) {
                         Address endereco = listaEndereco.get(0);
@@ -81,7 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Double lon = endereco.getLongitude();
                         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-                        LatLng localUsuario = new LatLng(lat, lon);
+                        LatLng localUsuario = new LatLng(varEx, varEx2);
 
                         mMap.addMarker(new MarkerOptions()
                                 .position(localUsuario)
@@ -112,7 +113,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         Log.d("local", "onLocationChanged: " + endereco.toString());
 
-
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -132,6 +132,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
+
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -150,6 +151,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+
     private void atualizaPosição(int taxaAtualiza){
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             locationManager.requestLocationUpdates(
@@ -159,6 +161,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             );
         }
     }
+
+
 
 
     private void validaNegado() {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
 
@@ -31,17 +31,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:labelFor="@id/txtLogin"
+        android:labelFor="@id/cademp"
         android:text="Empresa a qual pertence"
         android:textColor="@color/Preto" />
 
     <EditText
-        android:id="@+id/txtLogin"
+        android:id="@+id/cademp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableRight="@drawable/ic_help"
         android:inputType="textEmailAddress"
         android:maxLength="50" />
+
 
     <TextView
 
@@ -49,30 +50,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:labelFor="@id/txtLogin"
-        android:text="Matricula do Empregado"
-        android:textColor="@color/Preto" />
 
-    <EditText
-        android:id="@+id/txtLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableRight="@drawable/ic_help"
-        android:inputType="textEmailAddress"
-        android:maxLength="50" />
-
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:labelFor="@id/txtLogin"
         android:text="@string/login"
         android:textColor="@color/Preto" />
 
     <EditText
-        android:id="@+id/txtLogin"
+        android:id="@+id/cadtxtlogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableRight="@drawable/ic_help"
@@ -84,12 +67,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:labelFor="@id/txtSenha"
+
         android:text="@string/senha"
         android:textColor="@color/Preto" />
 
     <EditText
-        android:id="@+id/txtSenha"
+        android:id="@+id/cadtxtSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
@@ -99,8 +82,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:labelFor="@id/txtSenha"
+        android:layout_marginTop="10dp"
+
         android:text="Deseja ativar o Modo competição?"
         android:textColor="@color/Preto" />
 
@@ -108,7 +91,7 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="50dp"/>
+        />
 
 
     <LinearLayout
@@ -118,7 +101,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnEntrar"
+            android:id="@+id/btncadcad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -128,7 +111,7 @@
             android:textColor="@color/colorPrimary" />
 
         <Button
-            android:id="@+id/btnSair"
+            android:id="@+id/btnSaircad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"

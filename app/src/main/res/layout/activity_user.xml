@@ -20,6 +20,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/ic_back"
+            android:id="@+id/backbtnus"
             android:padding="5dp"/>
 
         <TextView
@@ -43,6 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="User Name"
+        android:id="@+id/usrNameUsr"
         android:textSize="40sp"
         android:layout_gravity="center"/>
 
@@ -88,6 +90,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="Histórico"
+            android:clickable="true"
+            android:onClick="historico"
             android:id="@+id/historicobtn"
             android:textColor="@color/colorPrimary"
             android:background="@color/Preto"/>
@@ -96,6 +100,8 @@
             android:layout_marginTop="3dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:clickable="true"
+            android:onClick="ranking"
             android:text="Classificação"
             android:id="@+id/rankingbtn"
             android:textColor="@color/colorPrimary"
