@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Permissoes {
+public class ADPPermissoes {
     public static boolean validarPermissoes(String[] permissoes, Activity activity, int requestCode) {
         if (Build.VERSION.SDK_INT >= 23) {
             List<String> listaPermissoes = new ArrayList<>();

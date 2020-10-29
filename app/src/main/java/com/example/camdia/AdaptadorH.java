@@ -2,7 +2,6 @@ package com.example.camdia;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,28 +13,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class AdaptadorH extends ArrayAdapter<Humano> {
+public class AdaptadorH extends ArrayAdapter<ModelUser> {
 
     String nometabela;
     Context contexto;
     int listaLay;
-    List<Humano> listahumanos;
-    SQLiteDatabase meuBancoDeDados;
+    List<ModelUser> listahumanos;
 
 
 
-    public AdaptadorH(Context contexto, int itemlista, List<Humano> hList, SQLiteDatabase meuBancoDeDados, String nometabela) {
+
+    public AdaptadorH(Context contexto, int itemlista, List<ModelUser> hList) {
 
         super(contexto, itemlista, hList);
 
         this.contexto = contexto;
         this.listaLay = itemlista;
         this.listahumanos = hList;
-        this.meuBancoDeDados = meuBancoDeDados;
-        this.nometabela = nometabela;
+
 
     }
 
@@ -48,15 +45,15 @@ public class AdaptadorH extends ArrayAdapter<Humano> {
         LayoutInflater inflater = LayoutInflater.from(contexto);
         View view = inflater.inflate(listaLay, null);
 
-        final Humano humano = listahumanos.get(position);
+        final ModelUser ModelUser = listahumanos.get(position);
 
         TextView txtViewNome = view.findViewById(R.id.nomeHist);
         TextView txtViewKm = view.findViewById(R.id.kmHist);
         TextView txtViewklf = view.findViewById(R.id.statsHist);
 
-        txtViewNome.setText(humano.getNome());
-        txtViewKm.setText(humano.getKm().toString());
-        txtViewklf.setText(Integer.toString(humano.getRank()));
+        txtViewNome.setText(ModelUser.getNome());
+        txtViewKm.setText(ModelUser.getKm().toString());
+        txtViewklf.setText(Integer.toString(ModelUser.getRank()));
 
         return view;
 

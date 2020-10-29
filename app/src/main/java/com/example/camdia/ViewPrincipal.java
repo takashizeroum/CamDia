@@ -5,10 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
-public class TDL extends AppCompatActivity {
+public class ViewPrincipal extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +27,7 @@ public class TDL extends AppCompatActivity {
         findViewById(R.id.perfilbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), User.class ));
+                startActivity(new Intent(getApplicationContext(), ViewUser.class ));
                 Toast.makeText(getApplicationContext(), "Perfil de Usuário", Toast.LENGTH_SHORT).show();
             }
         });

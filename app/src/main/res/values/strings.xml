@@ -6,7 +6,9 @@
     <string name="cadastrar">Cadastrar</string>
     <string name="login">Login</string>
     <string name="senha">Senha</string>
-
-
+    <string-array name="escolhasSpinner">
+        <item>Sim</item>
+        <item>Não</item>
+    </string-array>
 
 </resources>
