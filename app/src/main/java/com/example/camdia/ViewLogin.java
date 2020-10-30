@@ -1,6 +1,7 @@
 package com.example.camdia;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +10,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class ViewLogin extends AppCompatActivity {
+    ArrayList<ModelUser> lista = new ArrayList<ModelUser>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +24,10 @@ public class ViewLogin extends AppCompatActivity {
         Button btnEntrar = findViewById(R.id.btnEntrar);
         Button btnCadastrar = findViewById(R.id.btnCadastrar);
 
-        //btnEntrar.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View view) {
-        //    valida();
-        //}});
+        btnEntrar.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View view) {
+            Log.d("entre", "onClick: entrou");
+
+        }});
         btnCadastrar.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View view) {cadasta();}});
 
     }

@@ -14,6 +14,7 @@ public class ViewUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
+
         // cadastrando para teste
         DBLocalController control = new DBLocalController(getBaseContext());
         control.insereDado(new ModelUser("jose","ana","kkk","ps",1,"simsss",1,200.0,

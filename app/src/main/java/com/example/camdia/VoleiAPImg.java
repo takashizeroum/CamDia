@@ -14,7 +14,7 @@ import com.android.volley.toolbox.ImageRequest;
 
 public class VoleiAPImg extends AppCompatActivity {
 
-    String server_url = "http://192.168.0.11/CAMDIA/paulinha.jpeg";
+    String server_url = "http://192.168.0.26/CAMDIA/paulinha.jpeg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

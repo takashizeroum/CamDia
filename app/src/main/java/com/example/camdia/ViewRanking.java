@@ -19,12 +19,15 @@ public class ViewRanking extends AppCompatActivity {
     AdaptadorR Adapter;
     private ArrayList<ModelUser> listaGenerica= new ArrayList<ModelUser>();
     ListView listView;
+    DBJsonReqVoleiAPI jso = new DBJsonReqVoleiAPI(ViewRanking.this);
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
+
+
         visualRank();
 
         ImageView btnvolt = findViewById(R.id.backusr);
@@ -40,6 +43,8 @@ public class ViewRanking extends AppCompatActivity {
     }
 
     private void visualRank() {
+
+
         DBLocalController controller = new DBLocalController(ViewRanking.this);
         Cursor cursor = controller.resgata();
         if (cursor.moveToFirst()) {
@@ -59,9 +64,13 @@ public class ViewRanking extends AppCompatActivity {
                 ));
             } while (cursor.moveToNext());
         }
-        Log.d("testing", "visualRank: "+listaGenerica.get(0).getNome());
+        DBJsonReqVoleiAPI jso = new DBJsonReqVoleiAPI(ViewRanking.this);
+        ArrayList<ModelUser> listaa = jso.getList();
+
         //Verificar o layout
-        Adapter = new AdaptadorR(this, R.layout.listitemforuser, listaGenerica);
+        Log.d("testing", "visualRank: "+listaa.size());
+
+        Adapter = new AdaptadorR(this, R.layout.listitemforuser, listaa);
         listView = findViewById(R.id.listRanking);
         listView.setAdapter(Adapter);
     }
