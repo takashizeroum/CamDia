@@ -12,14 +12,16 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class ViewHistorico extends AppCompatActivity {
-    AdaptadorH Adapter;
-    private ArrayList<ModelUser> listaGenerica= new ArrayList<ModelUser>();
+
+    AdaptadorH Adapter ;
+    private ArrayList<ModelUser> listar = new ArrayList<>();
     ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historico);
+
         visualHist();
         Bundle put;
         String nometabela;
@@ -27,10 +29,10 @@ public class ViewHistorico extends AppCompatActivity {
         nometabela = put.getString("chave");
 
 
-    if(nometabela =="historico"){
+    if(nometabela.equals("historico")){
         Log.d("caso", "onCreate: his caso 2 mano ");
         Log.d("caso", "onCreate: "+nometabela);
-    }else if (nometabela=="ranking"){
+    }else if (nometabela.equals("ranking")){
         Log.d("caso", "onCreate: ran caso 1 mano");
         Log.d("caso", "onCreate: "+nometabela);
     }
@@ -48,7 +50,7 @@ public class ViewHistorico extends AppCompatActivity {
 
 
     private void visualHist() {
-        DBLocalController controller = new DBLocalController(ViewHistorico.this);
+       /* DBLocalController controller = new DBLocalController(ViewHistorico.this);
         Cursor cursor = controller.resgata();
         if (cursor.moveToFirst()) {
             do {
@@ -66,12 +68,18 @@ public class ViewHistorico extends AppCompatActivity {
 
                 ));
             } while (cursor.moveToNext());
-        }
-        Log.d("testing", "visualRank: "+listaGenerica.get(0).getNome());
-        //Verificar o layout
-        Adapter = new AdaptadorH(this, R.layout.listitemforhistory, listaGenerica);
-        listView = findViewById(R.id.listHist);
-        listView.setAdapter(Adapter);
+        }*/
+
+        DBJsonReqVoleiAPI jso = new DBJsonReqVoleiAPI(ViewHistorico.this,"http://192.168.0.11/CAMDIA/Query.php");
+        jso.getList(new VolleyCallBack() {
+            @Override
+            public void onSuccess(ArrayList<ModelUser> listaGenerica) {
+                listar = listaGenerica;
+                Adapter = new AdaptadorH(ViewHistorico.this, R.layout.listitemforhistory, listar);
+                listView = findViewById(R.id.listHist);
+                listView.setAdapter(Adapter);
+            }
+        });
     }
 
 }

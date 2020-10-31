@@ -7,8 +7,8 @@
     <string name="login">Login</string>
     <string name="senha">Senha</string>
     <string-array name="escolhasSpinner">
-        <item>Sim</item>
         <item>Não</item>
+        <item>Sim</item>
     </string-array>
 
 </resources>

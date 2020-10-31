@@ -17,7 +17,7 @@ import java.util.List;
 
 public class AdaptadorH extends ArrayAdapter<ModelUser> {
 
-    String nometabela;
+
     Context contexto;
     int listaLay;
     List<ModelUser> listahumanos;

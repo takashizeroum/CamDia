@@ -44,7 +44,7 @@ public class DBLocalController {
         if(cursor!=null){
             cursor.moveToFirst();
         }
-        Log.d("testing", "resgata: "+cursor);
+
         db.close();
         return cursor;
     }

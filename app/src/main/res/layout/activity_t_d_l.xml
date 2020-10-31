@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-        android:elevation="10dp"
+
         android:orientation="horizontal"
         android:gravity="center"
         >
@@ -34,23 +34,25 @@
         android:gravity="center"
         android:layout_marginVertical="5dp"
         >
-        <TextView
+        <Chronometer
+            android:id="@+id/chronometro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="00:00:00"
-            />
+            android:textColor="@color/cinza"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
             android:text="0km"
+            android:textColor="@color/cinza"
             android:layout_marginHorizontal="70dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/cinza"
             android:textSize="20sp"
             android:text="0.00 km/h"
             />
@@ -64,7 +66,12 @@
         android:layout_height="350dp"
         android:orientation="vertical">
 
-        <include layout="@layout/activity_maps" />
+        <include layout="@layout/activity_maps"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            />
 
     </LinearLayout>
 
@@ -74,17 +81,20 @@
         android:layout_gravity="center"
         android:layout_marginVertical="5dp">
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_pause"/>
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginHorizontal="30dp"
-            android:src="@drawable/ic_play"/>
 
         <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:id="@+id/cronoplay"
+
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/ic_play"
+            />
+
+        <ImageView
+            android:clickable="true"
+            android:id="@+id/cronostop"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_stop"/>

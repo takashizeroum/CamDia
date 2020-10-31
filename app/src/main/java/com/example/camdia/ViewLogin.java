@@ -1,4 +1,5 @@
 package com.example.camdia;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class ViewLogin extends AppCompatActivity {
-    ArrayList<ModelUser> lista = new ArrayList<ModelUser>();
+    //ArrayList<ModelUser> lista = new ArrayList<ModelUser>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +26,14 @@ public class ViewLogin extends AppCompatActivity {
         Button btnCadastrar = findViewById(R.id.btnCadastrar);
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View view) {
-            Log.d("entre", "onClick: entrou");
+            valida();
 
         }});
         btnCadastrar.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View view) {cadasta();}});
 
     }
 
-/*
+
     private void valida () {
         EditText login = findViewById(R.id.txtlogLogin);
         EditText senha = findViewById(R.id.txtlogSenha);
@@ -40,29 +41,16 @@ public class ViewLogin extends AppCompatActivity {
         final String log = login.getText().toString();
         final String senh= senha.getText().toString();
 
-        Cursor cursorlista = meuBd.rawQuery("SELECT * FROM users WHERE login=? AND senha=?" , new String[]{log, senh});
+        startActivity(new Intent(getApplicationContext(), ViewPrincipal.class));
 
-        if (cursorlista != null && cursorlista.moveToFirst()) {
-            ModelUser iuser = new ModelUser(
-                    cursorlista.getInt(0),
-                    cursorlista.getString(1),
-                    cursorlista.getString(2),
-                    cursorlista.getString(3)
-            );
-
-
-            startActivity(new Intent(getApplicationContext(), ViewPrincipal.class));
-            
+            // sem autenticação
             Toast.makeText(getApplicationContext(), "Bem Vindo!", Toast.LENGTH_SHORT).show();
-        }else{
             Toast.makeText(getApplicationContext(), "ViewLogin e/ou Senha Inválidos", Toast.LENGTH_SHORT).show();
-        }
-        cursorlista.close();
 
 
 
     }
-*/
+
 
     //abrir formulario cadstro
     private void cadasta() {

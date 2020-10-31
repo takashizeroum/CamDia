@@ -17,9 +17,10 @@ import java.util.List;
 public class ViewRanking extends AppCompatActivity {
 
     AdaptadorR Adapter;
-    private ArrayList<ModelUser> listaGenerica= new ArrayList<ModelUser>();
+    private ArrayList<ModelUser> listar = new ArrayList<>();
     ListView listView;
-    DBJsonReqVoleiAPI jso = new DBJsonReqVoleiAPI(ViewRanking.this);
+
+
 
 
     @Override
@@ -43,13 +44,10 @@ public class ViewRanking extends AppCompatActivity {
     }
 
     private void visualRank() {
-
-
-        DBLocalController controller = new DBLocalController(ViewRanking.this);
+    /*  DBLocalController controller = new DBLocalController(ViewRanking.this);
         Cursor cursor = controller.resgata();
         if (cursor.moveToFirst()) {
-            do {
-                listaGenerica.add(new ModelUser(
+            do {listaGenerica.add(new ModelUser(
                         cursor.getString(0),
                         cursor.getString(1),
                         cursor.getString(2),
@@ -59,20 +57,21 @@ public class ViewRanking extends AppCompatActivity {
                         cursor.getInt(6),
                         cursor.getDouble(7),
                         cursor.getInt(8),
-                        cursor.getDouble(9)
+                        cursor.getDouble(9)));
+            } while (cursor.moveToNext());}
+*/
+        DBJsonReqVoleiAPI jso = new DBJsonReqVoleiAPI(ViewRanking.this,"http://192.168.0.11/CAMDIA/Query.php");
+        jso.getList(new VolleyCallBack() {
+            @Override
+            public void onSuccess(ArrayList<ModelUser> listaGenerica) {
+                listar = listaGenerica;
+                Adapter = new AdaptadorR(getApplicationContext(), R.layout.listitemforuser, listar);
+                listView = findViewById(R.id.listRanking);
+                listView.setAdapter(Adapter);
+            }
+        });
 
-                ));
-            } while (cursor.moveToNext());
-        }
-        DBJsonReqVoleiAPI jso = new DBJsonReqVoleiAPI(ViewRanking.this);
-        ArrayList<ModelUser> listaa = jso.getList();
 
-        //Verificar o layout
-        Log.d("testing", "visualRank: "+listaa.size());
-
-        Adapter = new AdaptadorR(this, R.layout.listitemforuser, listaa);
-        listView = findViewById(R.id.listRanking);
-        listView.setAdapter(Adapter);
     }
 
 

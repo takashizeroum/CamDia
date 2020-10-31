@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewUser"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ViewUser">
 
 
     <LinearLayout
@@ -17,95 +17,132 @@
 
 
         <ImageView
+            android:id="@+id/backbtnus"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/ic_back"
-            android:id="@+id/backbtnus"
-            android:padding="5dp"/>
+            android:padding="5dp"
+            android:src="@drawable/ic_back" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Perfil"
-            android:padding="5dp"
             android:gravity="end"
-            android:textSize="40sp"
-            />
-        </LinearLayout>
+            android:padding="5dp"
+            android:text="Perfil"
+            android:textSize="40sp" />
+    </LinearLayout>
 
 
     <ImageView
+        android:id="@+id/imgPerfil"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/ic_baseline_account_box_24"
-        android:id="@+id/imgPerfil"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:src="@drawable/ic_baseline_account_box_24" />
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="User Name"
         android:id="@+id/usrNameUsr"
-        android:textSize="40sp"
-        android:layout_gravity="center"/>
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Informações complementares"
-        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:text="User Name"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/usrempUsr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginVertical="5dp"
-        android:layout_gravity="center"/>
+        android:text="Industria S.A"
+        android:textSize="20sp" />
+
     <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/spinerstatuscomp"
-        android:layout_marginVertical="10dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sua colocação no Ranking"
-        android:layout_marginVertical="10dp"
-        android:textSize="20sp"
-        android:layout_gravity="center"/>
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
-        android:text="Kms Percorridos"
-        android:textSize="20sp"
         android:layout_gravity="center"/>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        >
+        <TextView
 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="10dp"
+            android:text="Sua colocação no Ranking: "
+            android:textSize="20sp" />
 
+        <TextView
+            android:id="@+id/usrcolocaUsr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="10dp"
+            android:text="1"
+            android:textColor="@color/Vermelho"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_gravity="center">
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:text="Kms Percorridos: "
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/usrkmUsr"
+        android:textColor="@color/colorAccent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:text="10.0"
+        android:textSize="20sp" />
+
+</LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center"
-        >
+        android:orientation="vertical">
+
         <Button
-            android:drawableRight="@drawable/ic_historico"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Histórico"
-            android:clickable="true"
-            android:onClick="historico"
             android:id="@+id/historicobtn"
-            android:textColor="@color/colorPrimary"
-            android:background="@color/Preto"/>
-        <Button
-            android:drawableRight="@drawable/ic_flag"
-            android:layout_marginTop="3dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:background="@color/Preto"
             android:clickable="true"
+            android:drawableRight="@drawable/ic_historico"
+            android:onClick="historico"
+            android:text="Histórico"
+            android:textColor="@color/colorPrimary" />
+
+        <Button
+            android:id="@+id/rankingbtn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/Preto"
+            android:clickable="true"
+            android:drawableRight="@drawable/ic_flag"
             android:onClick="ranking"
             android:text="Classificação"
-            android:id="@+id/rankingbtn"
-            android:textColor="@color/colorPrimary"
-            android:background="@color/Preto"/>
+            android:textColor="@color/colorPrimary" />
 
 
     </LinearLayout>

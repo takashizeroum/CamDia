@@ -8,7 +8,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,15 +16,16 @@ import java.util.ArrayList;
 
 public class DBJsonReqVoleiAPI {
     Context context;
-    ArrayList<ModelUser> arrayList = new ArrayList<ModelUser>();
-    String url_json = "http://192.168.0.26/CAMDIA/contatos.php";
+    ArrayList<ModelUser> arrayList = new ArrayList<>();
+    String url_json;
     int contador = 0;
 
-    public DBJsonReqVoleiAPI(Context context) {
+    public DBJsonReqVoleiAPI(Context context, String url_json) {
         this.context = context;
+        this.url_json = url_json;
     }
 
-    public ArrayList<ModelUser> getList() {
+    public void getList(final VolleyCallBack callBack) {
 
         final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, url_json, null,
 
@@ -41,7 +41,7 @@ public class DBJsonReqVoleiAPI {
                                         jsonObject.getString("Senha"),jsonObject.getInt("Id"),jsonObject.getString("Descricao"),jsonObject.getInt("Rank"),
                                         jsonObject.getDouble("Km"),jsonObject.getInt("Comp"),jsonObject.getDouble("Tempo"));
                                 arrayList.add(user);
-                                Log.d("testing", "onResponse: "+"array tem tamanho"+arrayList.size());
+
 
                                 contador++;
 
@@ -49,8 +49,8 @@ public class DBJsonReqVoleiAPI {
                                 e.printStackTrace();
 
                             }
-                        Log.d("testing", "onResponse: "+"array tentativa"+arrayList.size());
-
+                        Log.d("testing", "onResponse: "+"array tem tamanho"+arrayList.size());
+                            callBack.onSuccess(arrayList);
                     }
 
 
@@ -62,10 +62,10 @@ public class DBJsonReqVoleiAPI {
                 error.printStackTrace();
             }
         });
-        Log.d("testing", "onResponse: "+" no fim array tem:" +arrayList.size());
+
         ADPMySingleton.getInstance(context).addToRequestQue(jsonArrayRequest);
 
-        return arrayList;
+
 
     }
 
