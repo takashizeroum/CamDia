@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -14,7 +15,6 @@ import com.android.volley.toolbox.ImageRequest;
 
 public class VoleiAPImg extends AppCompatActivity {
 
-    String server_url = "http://192.168.0.11/CAMDIA/paulinha.jpeg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class VoleiAPImg extends AppCompatActivity {
     }
 
     //Carrega imagem de perfil usuario
-    public void carregaImg(final ImageView i, final Context c) {
+    public void carregaImg(final ImageView i, final Context c, final String server_url) {
 
 
         final ImageRequest imageRequest = new ImageRequest(server_url,
@@ -40,9 +40,11 @@ public class VoleiAPImg extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(c,
-                                "Erro ao visualizar a imagem",
+                                "Erro ao visualizar a imagem"+server_url,
+
                                 Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
+
                     }
                 });
         ADPMySingleton.getInstance(c).addToRequestQue(imageRequest);

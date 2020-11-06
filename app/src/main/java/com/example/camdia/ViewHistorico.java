@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
+
 import java.util.ArrayList;
 
 public class ViewHistorico extends AppCompatActivity {
@@ -21,6 +23,11 @@ public class ViewHistorico extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historico);
+
+        //adapta spinner
+        Spinner spn = findViewById(R.id.frequenciaHist);
+        ADPSpinner spinner = new ADPSpinner(spn, getApplicationContext(),R.array.escolhasSpinnerhitsRank);
+
 
         visualHist();
         Bundle put;
@@ -41,8 +48,9 @@ public class ViewHistorico extends AppCompatActivity {
         btnvolt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent casa = new Intent(getApplicationContext(), ViewUser.class);
-                startActivity(casa);
+                finish();
+                //Intent casa = new Intent(getApplicationContext(), ViewUser.class);
+                //startActivity(casa);
             }
         });
     }
@@ -70,7 +78,7 @@ public class ViewHistorico extends AppCompatActivity {
             } while (cursor.moveToNext());
         }*/
 
-        DBJsonReqVoleiAPI jso = new DBJsonReqVoleiAPI(ViewHistorico.this,"http://192.168.0.11/CAMDIA/Query.php");
+        DBJsonReqVoleiAPI jso = new DBJsonReqVoleiAPI(ViewHistorico.this,"http://192.168.0.28/CAMDIA/Query.php");
         jso.getList(new VolleyCallBack() {
             @Override
             public void onSuccess(ArrayList<ModelUser> listaGenerica) {

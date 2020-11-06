@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,27 +20,28 @@ public class ViewRanking extends AppCompatActivity {
     AdaptadorR Adapter;
     private ArrayList<ModelUser> listar = new ArrayList<>();
     ListView listView;
-
-
+    private Spinner spn;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
-
-
         visualRank();
 
         ImageView btnvolt = findViewById(R.id.backusr);
         btnvolt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            Intent casa = new Intent(getApplicationContext(), ViewUser.class);
-                startActivity(casa);
+            finish();
+            //Intent casa = new Intent(getApplicationContext(), ViewUser.class);
+            //    startActivity(casa);
             }
         });
 
+        //adapta spinner
+        spn = findViewById(R.id.frequRank);
+        ADPSpinner spinner = new ADPSpinner(spn, getApplicationContext(),R.array.escolhasSpinnerhitsRank);
 
     }
 
@@ -60,7 +62,7 @@ public class ViewRanking extends AppCompatActivity {
                         cursor.getDouble(9)));
             } while (cursor.moveToNext());}
 */
-        DBJsonReqVoleiAPI jso = new DBJsonReqVoleiAPI(ViewRanking.this,"http://192.168.0.11/CAMDIA/Query.php");
+        DBJsonReqVoleiAPI jso = new DBJsonReqVoleiAPI(ViewRanking.this,"http://192.168.0.28/CAMDIA/Query.php");
         jso.getList(new VolleyCallBack() {
             @Override
             public void onSuccess(ArrayList<ModelUser> listaGenerica) {

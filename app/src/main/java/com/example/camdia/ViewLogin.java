@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+
 
 public class ViewLogin extends AppCompatActivity {
     //ArrayList<ModelUser> lista = new ArrayList<ModelUser>();
@@ -37,6 +37,7 @@ public class ViewLogin extends AppCompatActivity {
     private void valida () {
         EditText login = findViewById(R.id.txtlogLogin);
         EditText senha = findViewById(R.id.txtlogSenha);
+
 
         final String log = login.getText().toString();
         final String senh= senha.getText().toString();
@@ -88,20 +89,16 @@ public class ViewLogin extends AppCompatActivity {
 
 
 
-                DBLocalController db = new DBLocalController(getApplicationContext());
-                db.insereDado(new ModelUser(nome,log,emp,senh,1,"",0,10.6,1,5.3));
+//                DBLocalController db = new DBLocalController(getApplicationContext());
+  //              db.insereDado(new ModelUser(nome,log,emp,senh,1,"",0,10.6,1,5.3));
 
                 Toast.makeText(getApplicationContext(), "cadastrado na tabela ", Toast.LENGTH_SHORT).show();
-
-
-
-
+                dia.dismiss();
             }
         });
+}
 
 
-
-    }
 
 
 }

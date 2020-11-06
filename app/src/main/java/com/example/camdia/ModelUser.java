@@ -12,8 +12,9 @@ public class ModelUser {
     private Double km;
     private int compete;
     private Double tempo;
+    private String extras;
 
-    public ModelUser(String nome, String login, String empresa, String senha, int id, String desc, int rank, Double km, int compete, Double tempo) {
+    public ModelUser(String nome, String login, String empresa, String senha, int id, String desc, int rank, Double km, int compete, Double tempo, String extras) {
         this.nome = nome;
         this.login = login;
         this.empresa = empresa;
@@ -24,7 +25,9 @@ public class ModelUser {
         this.km = km;
         this.compete = compete;
         this.tempo = tempo;
+        this.extras = extras;
     }
+
 
     public String getNome() {
         return nome;
@@ -104,5 +107,14 @@ public class ModelUser {
 
     public void setTempo(Double tempo) {
         this.tempo = tempo;
+    }
+
+
+    public String getExtras() {
+        return extras;
+    }
+
+    public void setExtras(String extras) {
+        this.extras = extras;
     }
 }

@@ -1,14 +1,20 @@
 <resources>
-    <string name="app_name">CamDia</string>
+    <string name="app_name">Caminhadas Diárias</string>
     <string name="title_activity_maps">Map</string>
     <string name="entrar">Entrar</string>
     <string name="sair">Sair</string>
     <string name="cadastrar">Cadastrar</string>
     <string name="login">Login</string>
     <string name="senha">Senha</string>
-    <string-array name="escolhasSpinner">
+    <string-array name="escolhasSpinneruser">
         <item>Não</item>
         <item>Sim</item>
+    </string-array>
+
+    <string-array name="escolhasSpinnerhitsRank">
+        <item>Diário</item>
+        <item>Semanal</item>
+        <item>Mensal</item>
     </string-array>
 
 </resources>

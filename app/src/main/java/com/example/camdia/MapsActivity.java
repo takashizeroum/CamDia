@@ -63,8 +63,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Double latitude = location.getLatitude();
                 Double longitude = location.getLongitude();
 
-                Double varEx =-23.571749 ;
-                Double varEx2 =-46.4843544 ;
+              //  Double varEx =-23.571749 ;
+               // Double varEx2 =-46.4843544 ;
 
                 mMap.clear();
                 Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
@@ -80,7 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Double lon = endereco.getLongitude();
                         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-                        LatLng localUsuario = new LatLng(varEx, varEx2);
+                        LatLng localUsuario = new LatLng(lat, lon);
 
                         mMap.addMarker(new MarkerOptions()
                                 .position(localUsuario)

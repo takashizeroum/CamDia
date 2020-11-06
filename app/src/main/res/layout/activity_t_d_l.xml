@@ -56,8 +56,6 @@
             android:textSize="20sp"
             android:text="0.00 km/h"
             />
-
-
     </LinearLayout>
 
 
@@ -137,11 +135,4 @@
             android:background="@color/Vermelho"/>
 
     </LinearLayout>
-
-
-
-
-
-
-
 </LinearLayout>

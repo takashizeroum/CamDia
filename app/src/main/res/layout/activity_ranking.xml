@@ -41,9 +41,10 @@
         >
 
         <Spinner
-            android:id="@+id/frequenciaRanking"
+            android:id="@+id/frequRank"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp"/>
 
     </LinearLayout>
 

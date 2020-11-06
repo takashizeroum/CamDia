@@ -35,11 +35,11 @@ public class DBJsonReqVoleiAPI {
 
                             try {
                                 while (contador < response.length()) {
-                                Log.d("testing", "onResponse: "+"response tem tamanho"+response.length());
+
                                 JSONObject jsonObject = response.getJSONObject(contador);
                                 ModelUser user = new ModelUser(jsonObject.getString("Nome"), jsonObject.getString("Login"),jsonObject.getString("Empresa"),
                                         jsonObject.getString("Senha"),jsonObject.getInt("Id"),jsonObject.getString("Descricao"),jsonObject.getInt("Rank"),
-                                        jsonObject.getDouble("Km"),jsonObject.getInt("Comp"),jsonObject.getDouble("Tempo"));
+                                        jsonObject.getDouble("Km"),jsonObject.getInt("Comp"),jsonObject.getDouble("Tempo"),jsonObject.getString("extra"));
                                 arrayList.add(user);
 
 
@@ -49,7 +49,7 @@ public class DBJsonReqVoleiAPI {
                                 e.printStackTrace();
 
                             }
-                        Log.d("testing", "onResponse: "+"array tem tamanho"+arrayList.size());
+
                             callBack.onSuccess(arrayList);
                     }
 
