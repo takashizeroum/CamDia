@@ -9,12 +9,20 @@ import android.Manifest;
 import android.app.AlertDialog;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -36,6 +44,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -43,13 +52,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final int LOCATION_REQUEST = 500;
     public Polyline poliline;
     public List<LatLng> listPoints;
+    private LocationManager locationManager;
+    private LocationListener locationListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         listPoints = new ArrayList<LatLng>();
+        locationManager = (LocationManager) this.getSystemService(MapsActivity.this.LOCATION_SERVICE);
 
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(@NonNull Location location) {
+
+                Double latitude = location.getLatitude();
+                Double longitude = location.getLongitude();
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude), 15));
+                Log.d("testing", "onLocationChanged: nova lat long e´=== " + latitude.toString() + longitude.toString());
+            }
+        };
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -58,17 +81,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+
         mMap.getUiSettings().setZoomControlsEnabled(true);
+
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST);
-
+            Log.d("testing", "onMapReady:  mapa pronto click off");
             return;
         }
         mMap.setMyLocationEnabled(true);
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
+                atualizaPosição(10000);
                 if (listPoints.size() == 2) {
                     listPoints.clear();
                     mMap.clear();
@@ -100,6 +127,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
 
+
+
     }
 
     private String getRequestUrl(LatLng or, LatLng des) {
@@ -113,7 +142,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         String key = "key=AIzaSyCRIJYOU9BIiB-wcM229kGNNBbEBbZvgas";
 
-        String param = str_org + "&" + str_des + "&" + sensor + "&" + mode+ "&" +key;
+        String param = str_org + "&" + str_des + "&" + sensor + "&" + mode + "&" + key;
 
         String out = "json";
 
@@ -164,22 +193,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
     //permissão
 
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case LOCATION_REQUEST:
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    mMap.setMyLocationEnabled(true);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        for (int permissaoResultado : grantResults) {
+            if (permissaoResultado == PackageManager.PERMISSION_DENIED) {
+                validaNegado();
+            } else if (permissaoResultado == PackageManager.PERMISSION_GRANTED) {
+
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+
+                    return;
                 }
 
 
+            }
+        }
+    }
 
 
-                break;
+    private void atualizaPosição(int taxaAtualiza){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER,
+                    taxaAtualiza, 0,
+                    locationListener
+            );
         }
     }
 
