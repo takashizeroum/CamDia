@@ -1,48 +1,55 @@
 package com.example.camdia;
 
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.Context;
+
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
+import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-    private int taxaAtualiza;
+
     private GoogleMap mMap;
-    private String[] permissoes = new String[]{
-            Manifest.permission.ACCESS_FINE_LOCATION
-    };
-    private LocationManager locationManager;
-    private LocationListener locationListener;
+    private static final int LOCATION_REQUEST = 500;
+    public Polyline poliline;
+    public List<LatLng> listPoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        ADPPermissoes.validarPermissoes(permissoes, this, 1);
+        listPoints = new ArrayList<LatLng>();
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -51,115 +58,130 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.getUiSettings().setZoomControlsEnabled(true);
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST);
 
-        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        locationListener = new LocationListener() {
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
-            public void onLocationChanged(@NonNull Location location) {
-                Log.d("Localização", "onLocationChanged: " + location.toString());
-
-
-                Double latitude = location.getLatitude();
-                Double longitude = location.getLongitude();
-
-              //  Double varEx =-23.571749 ;
-               // Double varEx2 =-46.4843544 ;
-
-                mMap.clear();
-                Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-
-                try {
-                    List<Address> listaEndereco = geocoder.getFromLocation(latitude, longitude, 1);
-
-                    if (listaEndereco != null && listaEndereco.size() > 0) {
-                        Address endereco = listaEndereco.get(0);
-                        String ruaBaNu = endereco.getAddressLine(0);
-
-                        Double lat = endereco.getLatitude();
-                        Double lon = endereco.getLongitude();
-                        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
-                        LatLng localUsuario = new LatLng(lat, lon);
-
-                        mMap.addMarker(new MarkerOptions()
-                                .position(localUsuario)
-                                .title(ruaBaNu)
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.markflag))
-                        );
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(localUsuario, 15));
-
-                        /*
-                         * D/local: onLocationChanged:
-                         * Address[addressLines=[0:"R. Bonsucesso, 60 - Jardim Noronha, São Paulo - SP, 04853-192, Brazil"],
-                         * feature=60,
-                         * admin=São Paulo,
-                         * sub-admin=São Paulo,
-                         * locality=null,
-                         * thoroughfare=Rua Bonsucesso,
-                         * postalCode=04853-192,
-                         * countryCode=BR,
-                         * countryName=Brazil,
-                         * hasLatitude=true,
-                         * latitude=-23.7716203,
-                         * hasLongitude=true,
-                         * longitude=-46.6768499,
-                         * phone=null,
-                         * url=null,
-                         * extras=null]
-                         * */
-
-                        Log.d("local", "onLocationChanged: " + endereco.toString());
-
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+            public void onMapLongClick(LatLng latLng) {
+                if (listPoints.size() == 2) {
+                    listPoints.clear();
+                    mMap.clear();
                 }
-            }
-        };
+                listPoints.add(latLng);
 
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-
-                taxaAtualiza = 5000;
-                atualizaPosição(taxaAtualiza);
-
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng);
 
 
+                if (listPoints.size() == 1) {
+
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+
+                } else {
+
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+
+                }
+                mMap.addMarker(markerOptions);
+
+                if (listPoints.size() == 2) {
+                    String url = getRequestUrl(listPoints.get(0), listPoints.get(1));
+                    TaskRquestDirections taskRquestDirections = new TaskRquestDirections();
+                    taskRquestDirections.execute(url);
+
+                }
             }
         });
 
+
     }
+
+    private String getRequestUrl(LatLng or, LatLng des) {
+        String str_org = "origin=" + or.latitude + "," + or.longitude;
+
+        String str_des = "destination=" + des.latitude + "," + des.longitude;
+
+        String sensor = "sensor = false";
+
+        String mode = "mode=driving";
+
+        String key = "key=AIzaSyCRIJYOU9BIiB-wcM229kGNNBbEBbZvgas";
+
+        String param = str_org + "&" + str_des + "&" + sensor + "&" + mode+ "&" +key;
+
+        String out = "json";
+
+        String url = "https://maps.googleapis.com/maps/api/directions/" + out + "?" + param;
+
+        return url;
+    }
+
+    private String requestDir(String requUrl) throws IOException {
+
+        String responseString = "";
+        InputStream inputStream = null;
+        HttpURLConnection httpURLConnection = null;
+
+        try {
+            URL url = new URL(requUrl);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.connect();
+
+            inputStream = httpURLConnection.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+            StringBuffer stringBuffer = new StringBuffer();
+            String line = "";
+            while ((line = bufferedReader.readLine()) != null) {
+
+                stringBuffer.append(line);
+            }
+
+            responseString = stringBuffer.toString();
+            bufferedReader.close();
+            inputStreamReader.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null) {
+                inputStream.close();
+            }
+            httpURLConnection.disconnect();
+
+        }
+
+        return responseString;
+
+
+    }
+
+
+
+    //permissão
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case LOCATION_REQUEST:
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    mMap.setMyLocationEnabled(true);
+                }
 
 
-          for (int permissaoResultado : grantResults) {
-              if (permissaoResultado == PackageManager.PERMISSION_DENIED) {
-                  validaNegado();
-            }
-            else if (permissaoResultado == PackageManager.PERMISSION_GRANTED) {
-                taxaAtualiza = 10000;
-                atualizaPosição(taxaAtualiza);
-            }
+
+
+                break;
         }
     }
-
-
-
-    private void atualizaPosição(int taxaAtualiza){
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            locationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER,
-                    taxaAtualiza, 0,
-                    locationListener
-            );
-        }
-    }
-
 
 
 
@@ -178,6 +200,82 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         dialog.show();
     }
 
+
+    public class TaskRquestDirections extends AsyncTask<String,Void,String>{
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String responseStr = "";
+            try {
+                responseStr = requestDir(strings[0]);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            return responseStr;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            TaskParser taskParser = new TaskParser();
+            taskParser.execute(s);
+
+        }
+    }
+
+    public class TaskParser extends AsyncTask<String, Void, List<List<HashMap<String, String>>> >{
+
+        @Override
+        protected List<List<HashMap<String, String>>> doInBackground(String... strings) {
+
+            JSONObject jsonObject = null;
+            List<List<HashMap<String, String>>> routes = null;
+            try {
+                jsonObject = new JSONObject(strings[0]);
+                ADPDirectionsParser directionsParser = new ADPDirectionsParser();
+                routes = directionsParser.parse(jsonObject);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return routes;
+        }
+
+        @Override
+        protected void onPostExecute(List<List<HashMap<String, String>>> lists) {
+            ArrayList points = null;
+            PolylineOptions polylineOptions = null;
+            for(List<HashMap<String, String>> path : lists){
+                points = new ArrayList();
+                polylineOptions = new PolylineOptions();
+
+                for (HashMap<String, String> point : path){
+                    double lat = Double.parseDouble(point.get("lat"));
+                    double lon = Double.parseDouble(point.get("lng"));
+
+                    points.add(new LatLng(lat,lon));
+
+                }
+
+                polylineOptions.addAll(points);
+                polylineOptions.width(15);
+                polylineOptions.color(Color.BLACK);
+                polylineOptions.geodesic(true);
+
+            }
+            if(polylineOptions!=null){
+                mMap.addPolyline(polylineOptions);
+
+            }else {
+                Toast.makeText(getApplicationContext(),"Direction não encontrado",Toast.LENGTH_SHORT).show();
+                Log.d("testing", "onPostExecute: polylines ====" + polylineOptions);
+
+            }
+
+
+        }
+    }
 
 }
 

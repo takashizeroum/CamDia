@@ -55,7 +55,7 @@ public class ViewPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                //startActivity(new Intent(getApplicationContext(), MapsActivity.class));
                 Toast.makeText(getApplicationContext(), "Simulador Iniciado", Toast.LENGTH_SHORT).show();
             }
         });
