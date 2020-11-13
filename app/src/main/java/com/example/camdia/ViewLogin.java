@@ -19,15 +19,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class ViewLogin extends AppCompatActivity {
+
     //ArrayList<ModelUser> lista = new ArrayList<ModelUser>();
     EditText login;
     EditText senha;
-    JSONObject obj;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,12 +117,22 @@ public class ViewLogin extends AppCompatActivity {
             }
         });
 }
-public void valida (JSONObject objeto) throws JSONException {
+public void valida (JSONArray array) throws JSONException {
+    ModelUser us = null;
+
+    for (int i = 0; i < array.length(); i++) {
+        JSONObject obj = array.getJSONObject(i);
+        us = new ModelUser(obj.getString("nome"),obj.getString("login"),obj.getString("empresa"),obj.getString("senha"),obj.getInt("id"),obj.getString("desc"),obj.getInt("rank"),obj.getDouble("km"),obj.getInt("comp"),obj.getDouble("temp"),obj.getString("extra"));
+        Log.d("testingggg", "valida: "+us.getLogin());
+
+        startActivity(new Intent(ViewLogin.this, ViewPrincipal.class));
 
 
-        if(objeto.getString("login")=="123") {
-            Toast.makeText(getApplicationContext(), "Erro ", Toast.LENGTH_SHORT).show();
-        }
+    }
+
+
+
+
 
 }
 
@@ -156,14 +168,14 @@ public void valida (JSONObject objeto) throws JSONException {
             try {
 
                 final JSONObject jsonObject = new JSONObject(s);
-                obj = jsonObject;
-                valida(obj);
+                valida(jsonObject.getJSONArray("users"));
 
 
 
             } catch (JSONException e) {
 
                 e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "As credenciais são inválidas ", Toast.LENGTH_SHORT).show();
 
             }
 

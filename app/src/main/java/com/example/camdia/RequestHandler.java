@@ -1,5 +1,7 @@
 package com.example.camdia;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -63,9 +65,12 @@ public class RequestHandler {
             }
 
         } catch (Exception e) {
+
             e.printStackTrace();
         }
+
         return sb.toString();
+
     }
 
     public String sendGetRequest(String requestURL) {
@@ -80,6 +85,7 @@ public class RequestHandler {
                 sb.append(s + "\n");
             }
         } catch (Exception e) {
+
         }
         return sb.toString();
     }

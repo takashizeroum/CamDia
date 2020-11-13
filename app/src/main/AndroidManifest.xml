@@ -24,7 +24,8 @@
         <activity android:name=".ViewHistorico" />
         <activity android:name=".ViewRanking" />
         <activity android:name=".ViewUser" />
-        <activity android:name=".ViewLogin" />
+        <activity android:name=".ViewLogin"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ViewSplash">
 
 
@@ -36,7 +37,8 @@
 
 
         </activity>
-        <activity android:name=".ViewPrincipal">
+        <activity android:name=".ViewPrincipal"
+            android:windowSoftInputMode="stateHidden">
 
 
 
