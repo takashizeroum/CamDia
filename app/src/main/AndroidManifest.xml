@@ -27,8 +27,20 @@
         <activity android:name=".ViewLogin" />
         <activity android:name=".ViewSplash">
 
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
         </activity>
-        <activity android:name=".ViewPrincipal" />
+        <activity android:name=".ViewPrincipal">
+
+
+
+        </activity>
 
 
         <meta-data
@@ -40,14 +52,9 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
+            android:label="@string/title_activity_maps"
+            android:windowSoftInputMode="stateHidden">
 
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
 
 

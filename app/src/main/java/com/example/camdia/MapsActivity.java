@@ -20,6 +20,9 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -50,11 +53,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private static final int LOCATION_REQUEST = 500;
-    public Polyline poliline;
+    private LatLng ltlatual;
     public List<LatLng> listPoints;
     private LocationManager locationManager;
     private LocationListener locationListener;
-
+    EditText oritx;
+    EditText destx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 Double latitude = location.getLatitude();
                 Double longitude = location.getLongitude();
+                ltlatual = new LatLng(latitude,longitude);
+
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude), 15));
                 Log.d("testing", "onLocationChanged: nova lat long e´=== " + latitude.toString() + longitude.toString());
             }
@@ -76,6 +82,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        oritx= findViewById(R.id.txtmpO);
+        destx = findViewById(R.id.txtmpD);
+        findViewById(R.id.btnRota).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String or = oritx.getText().toString();
+                String de = destx.getText().toString();
+                or.replace(" ", "+").trim();
+                de.replace(" ", "+").trim();
+                String url = getRequestUrlTx(or, de);
+                TaskRquestDirections taskRquestDirections = new TaskRquestDirections();
+                taskRquestDirections.execute(url);
+
+            }
+        });findViewById(R.id.btnmpVoltar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ViewPrincipal.class));
+            }
+        });
+
     }
 
     @Override
@@ -92,40 +120,44 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
         mMap.setMyLocationEnabled(true);
-        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
-            public void onMapLongClick(LatLng latLng) {
+            public void onMapClick(LatLng latLng) {
                 atualizaPosição(10000);
                 if (listPoints.size() == 2) {
                     listPoints.clear();
                     mMap.clear();
                 }
+
                 listPoints.add(latLng);
 
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(latLng);
 
 
                 if (listPoints.size() == 1) {
-
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-
+                    mMap.addMarker(new MarkerOptions()
+                            .position(latLng)
+                            .title("Inicio")
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.markflag))
+                    );
                 } else {
-
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-
+                    mMap.addMarker(new MarkerOptions()
+                            .position(latLng)
+                            .title("Chegada")
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.markflag))
+                    );
                 }
-                mMap.addMarker(markerOptions);
+
 
                 if (listPoints.size() == 2) {
                     String url = getRequestUrl(listPoints.get(0), listPoints.get(1));
+
                     TaskRquestDirections taskRquestDirections = new TaskRquestDirections();
                     taskRquestDirections.execute(url);
 
                 }
+
             }
         });
-
 
 
 
@@ -135,6 +167,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String str_org = "origin=" + or.latitude + "," + or.longitude;
 
         String str_des = "destination=" + des.latitude + "," + des.longitude;
+
+        String sensor = "sensor = false";
+
+        String mode = "mode=driving";
+
+        String key = "key=AIzaSyCRIJYOU9BIiB-wcM229kGNNBbEBbZvgas";
+
+        String param = str_org + "&" + str_des + "&" + sensor + "&" + mode + "&" + key;
+
+        String out = "json";
+
+        String url = "https://maps.googleapis.com/maps/api/directions/" + out + "?" + param;
+
+        return url;
+    }
+    private String getRequestUrlTx(String or, String des) {
+        String str_org = "origin="+or;
+
+        String str_des = "destination=" +des;
 
         String sensor = "sensor = false";
 

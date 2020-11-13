@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btnEntrar"
@@ -70,18 +70,18 @@
             android:text="@string/entrar"
             android:textColor="@color/colorPrimary" />
 
+        <Button
+            android:id="@+id/btnCadastrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/Preto"
+            android:text="@string/cadastrar"
+            android:textColor="@color/colorAccent" />
+
 
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnCadastrar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@color/Preto"
-        android:text="@string/cadastrar"
-        android:textColor="@color/colorAccent" />
 
 
 </LinearLayout>
