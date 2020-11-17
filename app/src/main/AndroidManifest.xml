@@ -23,18 +23,18 @@
         <activity android:name=".VoleiAPImg"/>
         <activity android:name=".ViewHistorico" />
         <activity android:name=".ViewRanking" />
-        <activity android:name=".ViewUser" />
+        <activity android:name=".ViewUser" >
+
+        </activity>
         <activity android:name=".ViewLogin"
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ViewSplash">
-
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
 
         </activity>
         <activity android:name=".ViewPrincipal"

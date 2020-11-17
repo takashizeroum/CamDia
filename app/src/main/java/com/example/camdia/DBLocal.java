@@ -32,7 +32,8 @@ public class DBLocal extends SQLiteOpenHelper {
                 "rank integer DEFAULT 0 ," +
                 "km double DEFAULT 0 ," +
                 "compete integer DEFAULT 0 ," +
-                "tempo double DEFAULT 0  )";
+                "tempo double DEFAULT 0," +
+                "extras varchar(200))";
         db.execSQL(sql);
 
 
@@ -48,20 +49,3 @@ public class DBLocal extends SQLiteOpenHelper {
 
 
 
-/*
-
-        String insertSQL = "INSERT INTO  MemoriaLocal (" +
-                "nome, " +
-                "login," +
-                "empresa," +
-                "senha," +
-                "id," +
-                "des," +
-                "rank," +
-                "km," +
-                "compete," +
-                "tempo)"+
-                "VALUES(?,?,?,?,?,?,?,?,?,?);";
-
-
-*/

@@ -1,6 +1,8 @@
 package com.example.camdia;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -10,12 +12,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ViewUser extends AppCompatActivity {
 
     TextView nome, desc,rank, km;
     String urlimg;
+    ModelUser user = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +51,7 @@ public class ViewUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-                //startActivity(new Intent(getApplicationContext(), ViewPrincipal.class));
+                startActivity(new Intent(getApplicationContext(), ViewPrincipal.class));
             }
         });
     }
@@ -61,7 +69,52 @@ public class ViewUser extends AppCompatActivity {
     }
 
     public void VUCarrega(){
+        DBLocalController controller = new DBLocalController(getApplicationContext());
+        Cursor cursor = controller.resgata();
 
+        if (cursor.moveToFirst()) {
+            do {
+                user = new ModelUser(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getInt(4),
+                        cursor.getString(5),
+                        cursor.getInt(6),
+                        cursor.getDouble(7),
+                        cursor.getInt(8),
+                        cursor.getDouble(9),
+                        cursor.getString(10)
+
+                );
+            } while (cursor.moveToNext());
+
+        }
+        nome = findViewById(R.id.usrNameUsr);
+        desc = findViewById(R.id.usrempUsr);
+        rank = findViewById(R.id.usrcolocaUsr);
+        km = findViewById(R.id.usrkmUsr);
+
+        nome.setText(user.getNome());
+        desc.setText(user.getEmpresa());
+        rank.setText(String.valueOf(user.getRank()));
+        km.setText(user.getKm().toString());
+        urlimg = user.getExtras();
+
+        // chama classe que carrega imagem de perfil
+        ImageView i = findViewById(R.id.imgPerfil);
+        VoleiAPImg img = new VoleiAPImg();
+        img.carregaImg(i, getApplicationContext(),urlimg);
+
+
+    }
+
+
+
+
+
+        /*
        DBJsonReqVoleiAPI jso = new DBJsonReqVoleiAPI(ViewUser.this,"http://192.168.0.28/CAMDIA/QuerySingle.php");
        jso.getList(new VolleyCallBack() {
            @Override
@@ -87,10 +140,14 @@ public class ViewUser extends AppCompatActivity {
 
            }});
 
+*/
 
-
-    }
 
 
 
 }
+
+
+
+
+

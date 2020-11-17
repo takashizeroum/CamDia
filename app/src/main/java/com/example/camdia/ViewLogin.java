@@ -1,5 +1,6 @@
 package com.example.camdia;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -123,7 +124,17 @@ public void valida (JSONArray array) throws JSONException {
     for (int i = 0; i < array.length(); i++) {
         JSONObject obj = array.getJSONObject(i);
         us = new ModelUser(obj.getString("nome"),obj.getString("login"),obj.getString("empresa"),obj.getString("senha"),obj.getInt("id"),obj.getString("desc"),obj.getInt("rank"),obj.getDouble("km"),obj.getInt("comp"),obj.getDouble("temp"),obj.getString("extra"));
-        Log.d("testingggg", "valida: "+us.getLogin());
+
+        DBLocalController control = new DBLocalController(getBaseContext());
+        control.resgata();
+        Cursor cursor = control.resgata();
+
+        if (cursor.moveToFirst()) {
+        control.update(us);
+        }else{
+            control.insereDado(us);
+
+        }
 
         startActivity(new Intent(ViewLogin.this, ViewPrincipal.class));
 

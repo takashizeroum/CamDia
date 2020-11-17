@@ -53,7 +53,7 @@ public class AdaptadorH extends ArrayAdapter<ModelUser> {
 
         txtViewNome.setText(ModelUser.getNome());
         txtViewKm.setText(ModelUser.getKm().toString());
-        txtViewklf.setText(Integer.toString(ModelUser.getRank()));
+        txtViewklf.setText(ModelUser.getTempo().toString());
 
         return view;
 
