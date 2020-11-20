@@ -19,10 +19,13 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -59,12 +62,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationListener locationListener;
     EditText oritx;
     EditText destx;
+    Chronometer cronometro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         listPoints = new ArrayList<LatLng>();
+
+        ImageView btnvolt = findViewById(R.id.backbtnmaps);
+        btnvolt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                Intent casa = new Intent(getApplicationContext(), ViewPrincipal.class);
+                startActivity(casa);
+            }
+        });
+
+
         locationManager = (LocationManager) this.getSystemService(MapsActivity.this.LOCATION_SERVICE);
 
         locationListener = new LocationListener() {
@@ -73,9 +89,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 Double latitude = location.getLatitude();
                 Double longitude = location.getLongitude();
-                ltlatual = new LatLng(latitude,longitude);
+                ltlatual = new LatLng(latitude, longitude);
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude), 15));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15));
                 Log.d("testing", "onLocationChanged: nova lat long e´=== " + latitude.toString() + longitude.toString());
             }
         };
@@ -83,9 +99,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        oritx= findViewById(R.id.txtmpO);
+        oritx = findViewById(R.id.txtmpO);
         destx = findViewById(R.id.txtmpD);
-        findViewById(R.id.btnRota).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.mapsbtnformsend).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String or = oritx.getText().toString();
@@ -97,10 +113,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 taskRquestDirections.execute(url);
 
             }
-        });findViewById(R.id.btnmpVoltar).setOnClickListener(new View.OnClickListener() {
+        });
+        findViewById(R.id.mapsbtnformcancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ViewPrincipal.class));
+                findViewById(R.id.mapsformrotas).setVisibility(View.GONE);
+            }
+        });
+
+        findViewById(R.id.mapsaddrota).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                findViewById(R.id.mapsformrotas).setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        findViewById(R.id.mapscronoplay).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cronometroStart();
+            }
+        });
+
+
+        findViewById(R.id.mapscronostop).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cronometroStop();
             }
         });
 
@@ -132,7 +173,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 listPoints.add(latLng);
 
 
-
                 if (listPoints.size() == 1) {
                     mMap.addMarker(new MarkerOptions()
                             .position(latLng)
@@ -160,8 +200,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
 
-
     }
+
 
     private String getRequestUrl(LatLng or, LatLng des) {
         String str_org = "origin=" + or.latitude + "," + or.longitude;
@@ -182,10 +222,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         return url;
     }
-    private String getRequestUrlTx(String or, String des) {
-        String str_org = "origin="+or;
 
-        String str_des = "destination=" +des;
+    private String getRequestUrlTx(String or, String des) {
+        String str_org = "origin=" + or;
+
+        String str_des = "destination=" + des;
 
         String sensor = "sensor = false";
 
@@ -269,7 +310,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    private void atualizaPosição(int taxaAtualiza){
+    private void atualizaPosição(int taxaAtualiza) {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             locationManager.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER,
@@ -278,7 +319,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             );
         }
     }
-
 
 
     private void validaNegado() {
@@ -297,7 +337,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    public class TaskRquestDirections extends AsyncTask<String,Void,String>{
+
+
+
+    public class TaskRquestDirections extends AsyncTask<String, Void, String> {
 
 
         @Override
@@ -305,7 +348,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             String responseStr = "";
             try {
                 responseStr = requestDir(strings[0]);
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             return responseStr;
@@ -320,7 +363,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public class TaskParser extends AsyncTask<String, Void, List<List<HashMap<String, String>>> >{
+    public class TaskParser extends AsyncTask<String, Void, List<List<HashMap<String, String>>>> {
 
         @Override
         protected List<List<HashMap<String, String>>> doInBackground(String... strings) {
@@ -342,15 +385,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         protected void onPostExecute(List<List<HashMap<String, String>>> lists) {
             ArrayList points = null;
             PolylineOptions polylineOptions = null;
-            for(List<HashMap<String, String>> path : lists){
+            for (List<HashMap<String, String>> path : lists) {
                 points = new ArrayList();
                 polylineOptions = new PolylineOptions();
 
-                for (HashMap<String, String> point : path){
+                for (HashMap<String, String> point : path) {
                     double lat = Double.parseDouble(point.get("lat"));
                     double lon = Double.parseDouble(point.get("lng"));
 
-                    points.add(new LatLng(lat,lon));
+                    points.add(new LatLng(lat, lon));
 
                 }
 
@@ -360,11 +403,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 polylineOptions.geodesic(true);
 
             }
-            if(polylineOptions!=null){
+            if (polylineOptions != null) {
                 mMap.addPolyline(polylineOptions);
 
-            }else {
-                Toast.makeText(getApplicationContext(),"Direction não encontrado",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Direction não encontrado", Toast.LENGTH_SHORT).show();
                 Log.d("testing", "onPostExecute: polylines ====" + polylineOptions);
 
             }
@@ -373,5 +416,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    public void cronometroStart() {
+        cronometro = findViewById(R.id.mapschronometro);
+        cronometro.setBase(SystemClock.elapsedRealtime());
+        cronometro.start();
+    }
+
+    public void cronometroStop() {
+        cronometro.stop();
+    }
+
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.move_esquerda,R.anim.fade_out);
+    }
 }
+
+
 

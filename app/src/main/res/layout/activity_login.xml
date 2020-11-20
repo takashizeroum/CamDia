@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ViewLogin"
     android:orientation="vertical"
-
+    android:background="#F7F7F7"
     >
 
 
@@ -66,17 +66,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:background="@color/colorAccent"
+            android:background="@drawable/botao"
             android:text="@string/entrar"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorAccent" />
 
         <Button
             android:id="@+id/btnCadastrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/Preto"
+            android:background="@drawable/botao"
             android:text="@string/cadastrar"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/Preto" />
 
 
 

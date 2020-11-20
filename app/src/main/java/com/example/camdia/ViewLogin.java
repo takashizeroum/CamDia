@@ -1,6 +1,8 @@
 package com.example.camdia;
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteAccessPermException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -125,18 +129,26 @@ public void valida (JSONArray array) throws JSONException {
         JSONObject obj = array.getJSONObject(i);
         us = new ModelUser(obj.getString("nome"),obj.getString("login"),obj.getString("empresa"),obj.getString("senha"),obj.getInt("id"),obj.getString("desc"),obj.getInt("rank"),obj.getDouble("km"),obj.getInt("comp"),obj.getDouble("temp"),obj.getString("extra"));
 
+
         DBLocalController control = new DBLocalController(getBaseContext());
         control.resgata();
-        Cursor cursor = control.resgata();
 
-        if (cursor.moveToFirst()) {
-        control.update(us);
+        if (control.verifica(us.getId())==true){
+            control.update(us);
+            Log.d("asass", "valida: "+us.getEmpresa());
+
         }else{
+            control.delete();
             control.insereDado(us);
 
-        }
 
-        startActivity(new Intent(ViewLogin.this, ViewPrincipal.class));
+        }
+        Intent go = new Intent(ViewLogin.this, ViewPrincipal.class);
+        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.fade_in,R.anim.move_direita);
+        ActivityCompat.startActivity(ViewLogin.this,go,activityOptionsCompat.toBundle());
+        //startActivity(go);
+
+
 
 
     }

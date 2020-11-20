@@ -4,10 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ViewPrincipal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FBFBFD"
 
+    >
 
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,114 +28,143 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Caminhadas"
+            android:text="Mural"
+            android:id="@+id/titulomuralnomeemp"
             android:textSize="40sp"/>
 
 
 
     </LinearLayout>
+</androidx.cardview.widget.CardView>
 
-    <LinearLayout
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginVertical="5dp"
+        android:layout_height="450dp"
+        android:orientation="vertical"
+        android:background="#FBFBFD"
         >
-        <Chronometer
-            android:id="@+id/chronometro"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@color/cinza"/>
+            android:orientation="vertical"
+            android:id="@+id/formmural"
+            android:visibility="gone"
+            android:background="@color/Preto"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:text="0km"
-            android:textColor="@color/cinza"
-            android:layout_marginHorizontal="70dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/cinza"
-            android:textSize="20sp"
-            android:text="0.00 km/h"
-            />
-    </LinearLayout>
+            >
+
+            <EditText
+                android:id="@+id/txtmuralform"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:focusedByDefault="false"
+                android:maxLength="50"
+                android:textColorHint="@color/colorPrimary"
+                android:hint="Mensagem"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/botao"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginVertical="5dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/btnmuralformsend"
+                    android:src="@drawable/ic_check"
+                    android:clickable="true"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:textSize="30sp"
+                    android:textColor="@color/Preto"
+                    android:layout_marginHorizontal="10dp"
+                    />
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/btnmuralformcancel"
+                    android:clickable="true"
+                    android:src="@drawable/ic_close"/>
+
+            </LinearLayout>
+        </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:orientation="vertical">
+            <GridView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tdlmural"
+                android:background="#FBFBFD"
+                android:horizontalSpacing="2dp"
+                android:verticalSpacing="2dp"
+                android:columnWidth="90dp"
+                android:numColumns="2"
+                android:layout_margin="1dp"
+                />
 
 
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginVertical="5dp">
 
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:clickable="true"
-            android:id="@+id/cronoplay"
+            android:src="@drawable/ic_baseline_mode_comment"
+            android:id="@+id/btnformmural"
+            android:layout_gravity="end|bottom"
 
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_play"
+
             />
 
-        <ImageView
-            android:clickable="true"
-            android:id="@+id/cronostop"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_stop"/>
-    </LinearLayout>
+
+    </FrameLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="3dp"
-        android:orientation="vertical"
+        android:orientation="vertical">
 
-        >
+            <Button
+                android:drawableRight="@drawable/ic_map"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Simulador"
+                android:id="@+id/simuladorbtn"
+                android:textColor="@color/Preto"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/botao"/>
+
+
+
 
         <Button
-            android:drawableRight="@drawable/ic_map"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Simulador"
-            android:id="@+id/simuladorbtn"
-            android:textColor="@color/colorPrimary"
-            android:background="@color/Preto"/>
-        <Button
-            android:drawableRight="@drawable/ic_perfil"
-            android:layout_marginTop="3dp"
+            android:drawableRight="@drawable/ic_baseline_account_circle_24"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="Perfil"
             android:id="@+id/perfilbtn"
-            android:textColor="@color/colorPrimary"
-            android:background="@color/Preto"/>
+            android:textColor="@color/Preto"
+            android:background="@drawable/botao"
+            android:layout_marginVertical="14dp"
+            android:paddingHorizontal="10dp"/>
         <Button
             android:drawableRight="@drawable/ic_close"
-            android:layout_marginTop="3dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="Sair"
+
             android:id="@+id/sairbtn"
-            android:textColor="@color/colorPrimary"
-            android:background="@color/Vermelho"/>
+            android:textColor="@color/Vermelho"
+            android:background="@drawable/botao"
+            android:paddingHorizontal="10dp"/>
 
     </LinearLayout>
 </LinearLayout>

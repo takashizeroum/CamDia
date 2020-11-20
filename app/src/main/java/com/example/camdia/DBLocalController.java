@@ -8,6 +8,7 @@ import android.util.Log;
 public class DBLocalController {
     private SQLiteDatabase db;
     private DBLocal banco;
+    ModelUser user;
 
     public DBLocalController(Context context) {
         banco = new DBLocal(context);
@@ -38,7 +39,7 @@ public class DBLocalController {
         }
     }
 
-    public Cursor resgata() {
+    public ModelUser resgata() {
         Cursor cursor;
         String[] campos = {"nome", "login", "empresa", "senha", "id", "des", "rank", "km", "compete", "tempo","extras"};
         db = banco.getReadableDatabase();
@@ -46,13 +47,32 @@ public class DBLocalController {
         if(cursor!=null){
             cursor.moveToFirst();
         }
+        if (cursor.moveToFirst()) {
+            do {
+                user = new ModelUser(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getInt(4),
+                        cursor.getString(5),
+                        cursor.getInt(6),
+                        cursor.getDouble(7),
+                        cursor.getInt(8),
+                        cursor.getDouble(9),
+                        cursor.getString(10)
+
+                );
+            } while (cursor.moveToNext());
+
+        }
 
         db.close();
-        return cursor;
+        return user;
     }
-    public void delete(int id){
+    public void delete(){
         db = banco.getWritableDatabase();
-        db.delete("Memo","id=?", new String[]{"id"});
+        db.delete("Memo",null, null);
         db.close();
 
     }
@@ -72,9 +92,35 @@ public class DBLocalController {
         valores.put("extras", usr.getExtras());
 
         db.update("Memo",valores,"id=?", new String[]{String.valueOf(usr.getId())});
+        db.close();
 
 
     }
+    public boolean verifica(int id) {
+        Cursor cursor;
+        boolean bol;
+        String[] campos = {"nome", "login", "empresa", "senha", "id", "des", "rank", "km", "compete", "tempo","extras"};
+        db = banco.getReadableDatabase();
+        cursor = db.query("Memo", campos, "id = "+id, null, null, null, null, null);
+        if(cursor!=null){
+            cursor.moveToFirst();
+        }
+        if (cursor.moveToFirst()) {
+             bol = true;
+        }else{bol =false;}
+
+        db.close();
+
+        return bol ;
+    }
+    public void novaMemo  () {
+        db.execSQL("drop table Memo");
+
+    }
+
+
+
+
 }
 
 

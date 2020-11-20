@@ -154,6 +154,9 @@ public class ViewRanking extends AppCompatActivity {
 
     }
 
-
-
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.move_esquerda,R.anim.fade_out);
+    }
 }

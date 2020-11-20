@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical">
+<FrameLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="650dp"
+android:orientation="vertical"
+    android:background="#F7F7F7"
+    >
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
 
@@ -12,58 +15,146 @@ android:orientation="vertical">
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="520dp"
+        android:layout_height="590dp"
         tools:context=".MapsActivity"
 
+
         />
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_back"
+        android:layout_margin="5dp"
+        android:id="@+id/backbtnmaps"/>
+
+    <Chronometer
+        android:id="@+id/mapschronometro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/cinza"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:background="@drawable/botao"
+        android:gravity="center"
+
+        >
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_play"
+        android:clickable="true"
+        android:id="@+id/mapscronoplay"
+        android:layout_marginHorizontal="5dp"
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"
+            android:textSize="30sp"
+            android:textColor="@color/Preto"
+            />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_stop"
+        android:clickable="true"
+        android:id="@+id/mapscronostop"
+        android:layout_marginHorizontal="5dp"
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"
+            android:textSize="30sp"
+            android:textColor="@color/Preto"
+            />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="38dp"
+            android:src="@drawable/ic_add_location"
+            android:clickable="true"
+            android:id="@+id/mapsaddrota"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:text="0km"
+        android:textColor="@color/cinza"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="10dp"
+        />
 
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-    <EditText
-        android:id="@+id/txtmpO"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:focusedByDefault="false"
-        android:maxLength="50"
-        android:hint="Origem"
-        />
+        android:orientation="vertical"
+        android:id="@+id/mapsformrotas"
+        android:visibility="gone"
+        android:background="#F7F7F7"
+        >
 
-    <EditText
-        android:id="@+id/txtmpD"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:focusedByDefault="false"
-        android:maxLength="50"
-        android:hint="Destino"
-        />
-        <Button
-            android:id="@+id/btnRota"
+
+        <EditText
+            android:id="@+id/txtmpO"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:text="Traçar Rota"
-            android:textColor="@color/Preto" />
-        <Button
-        android:id="@+id/btnmpVoltar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/Vermelho"
-        android:text="Voltar"
-        android:textColor="@color/Preto" />
-</LinearLayout>
-    </ScrollView>
+            android:inputType="text"
+            android:focusedByDefault="false"
+            android:maxLength="50"
+            android:hint="Origem"
+            />
+
+        <EditText
+            android:id="@+id/txtmpD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:focusedByDefault="false"
+            android:maxLength="50"
+            android:hint="Destino"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/botao"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginVertical="5dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/mapsbtnformsend"
+                android:src="@drawable/ic_check"
+                android:clickable="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="|"
+                android:textSize="30sp"
+                android:textColor="@color/Preto"
+                android:layout_marginHorizontal="10dp"
+                />
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/mapsbtnformcancel"
+                android:clickable="true"
+                android:src="@drawable/ic_close"/>
+
+        </LinearLayout>
+    </LinearLayout>
 
 
-</LinearLayout>
+</FrameLayout>
 
 
 

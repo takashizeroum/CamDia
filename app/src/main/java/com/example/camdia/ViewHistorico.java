@@ -36,28 +36,7 @@ public class ViewHistorico extends AppCompatActivity {
         Spinner spn = findViewById(R.id.frequenciaHist);
         ADPSpinner spinner = new ADPSpinner(spn, getApplicationContext(),R.array.escolhasSpinnerhitsRank);
         DBLocalController controller = new DBLocalController(getApplicationContext());
-        Cursor cursor = controller.resgata();
-
-        if (cursor.moveToFirst()) {
-            do {
-                user = new ModelUser(
-                        cursor.getString(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getInt(4),
-                        cursor.getString(5),
-                        cursor.getInt(6),
-                        cursor.getDouble(7),
-                        cursor.getInt(8),
-                        cursor.getDouble(9),
-                        cursor.getString(10)
-
-                );
-            } while (cursor.moveToNext());
-
-        }
-
+        user = controller.resgata();
 
         HashMap<String, String> params = new HashMap<>();
         params.put("login", user.getLogin());
@@ -67,20 +46,6 @@ public class ViewHistorico extends AppCompatActivity {
         ViewHistorico.PNRView request = new PNRView(API.URL_hist, params,API.CODE_POST_REQUEST);
         request.execute();
 
-
-        Bundle put;
-        String nometabela;
-        put = getIntent().getExtras();
-        nometabela = put.getString("chave");
-
-
-    if(nometabela.equals("historico")){
-        Log.d("caso", "onCreate: his caso 2 mano ");
-        Log.d("caso", "onCreate: "+nometabela);
-    }else if (nometabela.equals("ranking")){
-        Log.d("caso", "onCreate: ran caso 1 mano");
-        Log.d("caso", "onCreate: "+nometabela);
-    }
 
         ImageView btnvolt = findViewById(R.id.backbtn);
         btnvolt.setOnClickListener(new View.OnClickListener() {
@@ -169,13 +134,13 @@ public class ViewHistorico extends AppCompatActivity {
 
                     final JSONObject jsonObject = new JSONObject(s);
                     visualHist(jsonObject.getJSONArray("users"));
-                Log.d("testinggggggggggg", "onPostExecute: "+jsonObject.getJSONArray("users"));
+                    Log.d("testing aff", "onPostExecute: "+jsonObject);
 
 
                 } catch (JSONException e) {
 
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Usuario não encontrado ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Historico não encontrado ", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -200,4 +165,9 @@ public class ViewHistorico extends AppCompatActivity {
         }
 
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.move_esquerda,R.anim.fade_out);
     }
+}

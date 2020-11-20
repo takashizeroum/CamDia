@@ -8,6 +8,7 @@ public class API {
     public static final String URL_READ = ROOT_URL + "get";
     public static final String URL_UPDATE = ROOT_URL + "update";
     public static final String URL_hist = ROOT_URL + "gethist";
+    public static final String URL_mural = ROOT_URL + "getmural";
     public static final int CODE_GET_REQUEST = 1024;
     public static final int CODE_POST_REQUEST = 1025;
 

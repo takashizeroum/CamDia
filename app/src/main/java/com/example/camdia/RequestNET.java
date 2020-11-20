@@ -1,6 +1,7 @@
 package com.example.camdia;
 
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,17 +19,17 @@ public class RequestNET extends AsyncTask<Void, Void, String> {
         String url;
         HashMap<String, String> params;
         int requestCode;
-        int metodo;
 
 
 
 
 
-        public RequestNET(String url, HashMap<String, String> params, int requestCode,int metodo) {
+
+        public RequestNET(String url, HashMap<String, String> params, int requestCode) {
             this.url = url;
             this.params = params;
             this.requestCode = requestCode;
-            this.metodo = metodo;
+
 
         }
 
@@ -42,27 +43,9 @@ public class RequestNET extends AsyncTask<Void, Void, String> {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            try {
 
-                final JSONObject jsonObject = new JSONObject(s);
+                Log.d("switch", "onPostExecute: "+s);
 
-                switch(metodo){
-                    case 1:
-                        ViewLogin lg = new ViewLogin();
-                        lg.valida(jsonObject.getJSONArray("users"));
-                    break;
-
-
-                }
-
-
-
-
-            } catch (JSONException e) {
-
-                e.printStackTrace();
-
-            }
 
 
         }

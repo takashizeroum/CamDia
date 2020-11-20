@@ -22,7 +22,7 @@ public class DBLocal extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String sql = "CREATE TABLE IF NOT EXISTS Memo (" +
+        String sql = " CREATE TABLE IF NOT EXISTS Memo (" +
                 "nome varchar(200) NOT NULL," +
                 "login varchar(20) NOT NULL," +
                 "empresa varchar(30) NOT NULL," +
@@ -43,6 +43,8 @@ public class DBLocal extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+
 
 
 }
