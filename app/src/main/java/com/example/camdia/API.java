@@ -2,7 +2,7 @@ package com.example.camdia;
 
 public class API {
 
-    private static final String ROOT_URL = "http://192.168.0.11/HeroApi/includes/Api.php?apicall=";
+    private static final String ROOT_URL = "http://192.168.0.28/HeroApi/includes/Api.php?apicall=";
 
     public static final String URL_veri = ROOT_URL + "verifica";
     public static final String URL_READ = ROOT_URL + "get";

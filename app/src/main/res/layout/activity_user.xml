@@ -15,17 +15,13 @@
         android:orientation="horizontal">
 
 
-        <ImageView
-            android:id="@+id/backbtnus"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:padding="5dp"
-            android:src="@drawable/ic_back" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
+            android:fontFamily="@font/cantarellxml"
+            android:textStyle="bold"
             android:padding="5dp"
             android:text="Perfil"
             android:textSize="40sp" />
@@ -33,20 +29,20 @@
 
 <FrameLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     >
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginTop="100dp">
+    android:layout_marginTop="70dp">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgPerfil"
         android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/ic_baseline_account_box_24" />
 
@@ -56,9 +52,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:fontFamily="@font/basic"
         android:text="User Name"
         android:textColor="@color/Preto"
-        android:textSize="40sp" />
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/usrempUsr"
@@ -84,6 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/basic"
             android:layout_marginVertical="10dp"
             android:text="Sua colocação no Ranking: "
             android:textSize="20sp"
@@ -96,6 +94,7 @@
             android:layout_gravity="center"
             android:layout_marginVertical="10dp"
             android:text="1"
+            android:fontFamily="@font/basic"
             android:textColor="@color/Vermelho"
             android:textSize="20sp"
             />
@@ -113,6 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:text="Kms Percorridos: "
+        android:fontFamily="@font/basic"
         android:textSize="20sp"
         android:textColor="@color/Preto"/>
 
@@ -121,6 +121,7 @@
         android:textColor="@color/colorAccent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/basic"
         android:layout_marginVertical="10dp"
         android:text="10.0"
         android:textSize="20sp" />
@@ -137,6 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Competindo: "
+        android:fontFamily="@font/basic"
         android:textSize="20sp"
         android:textColor="@color/Preto"
         android:layout_marginHorizontal="5dp"/>
@@ -157,6 +159,9 @@
             android:id="@+id/historicobtn"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:fontFamily="@font/molengoxml"
+            android:textAllCaps="false"
+            android:textSize="20sp"
             android:background="@drawable/botao"
             android:clickable="true"
             android:drawableRight="@drawable/ic_historico"
@@ -167,9 +172,13 @@
 
 
         <Button
+            android:layout_marginVertical="10dp"
             android:id="@+id/rankingbtn"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:fontFamily="@font/molengoxml"
+            android:textAllCaps="false"
+            android:textSize="20sp"
             android:layout_marginTop="3dp"
             android:background="@drawable/botao"
             android:clickable="true"
@@ -181,7 +190,71 @@
 
 
     </LinearLayout>
+
 </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:drawableRight="@drawable/ic_baseline_home_work_24"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="Início"
+            android:textSize="20sp"
+            android:textAllCaps="false"
+            android:fontFamily="@font/molengoxml"
+            android:id="@+id/muralpaginabtndeuser"
+            android:textColor="@color/Preto"
+            android:paddingHorizontal="10dp"
+            android:background="@drawable/botao"/>
+
+        <Button
+            android:drawableRight="@drawable/ic_map"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="Mapa"
+            android:textSize="20sp"
+            android:textAllCaps="false"
+            android:fontFamily="@font/molengoxml"
+            android:id="@+id/simuladorbtndeuser"
+            android:textColor="@color/Preto"
+            android:paddingHorizontal="10dp"
+            android:background="@drawable/botao"/>
+
+
+
+
+        <Button
+            android:drawableRight="@drawable/ic_baseline_account_circle_24"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="Perfil"
+            android:textSize="20sp"
+            android:textAllCaps="false"
+            android:fontFamily="@font/molengoxml"
+            android:id="@+id/perfilbtndeuser"
+            android:textColor="@color/Preto"
+            android:background="@drawable/botaoativo"
+            android:paddingHorizontal="10dp"/>
+
+        <Button
+            android:id="@+id/sairbtndeuser"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:background="@drawable/botao"
+            android:drawableRight="@drawable/ic_baseline_replay_24"
+            android:fontFamily="@font/molengoxml"
+            android:paddingHorizontal="10dp"
+            android:text="Voltar"
+            android:textAllCaps="false"
+            android:textColor="@color/Vermelho"
+            android:textSize="20sp" />
+
+    </LinearLayout>
 </FrameLayout>
 
 

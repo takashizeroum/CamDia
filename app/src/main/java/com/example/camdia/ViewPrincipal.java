@@ -38,20 +38,15 @@ public class ViewPrincipal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_t_d_l);
 
+        refrescaVisualMural();
+        findViewById(R.id.muralpaginabtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refrescaVisualMural();
 
 
-
-        DBLocalController controller = new DBLocalController(getApplicationContext());
-        ModelUser us = controller.resgata();
-
-        HashMap<String, String> params = new HashMap<>();
-        params.put("login", "login");
-        params.put("senha", "senha");
-        params.put("empresa", String.valueOf(us.getEmpresa()));
-
-        ViewPrincipal.PNRViewP request = new ViewPrincipal.PNRViewP(API.URL_mural, params,API.CODE_POST_REQUEST);
-        request.execute();
-
+            }
+        });
 
 
        /* findViewById(R.id.btnformmural).setOnClickListener(new View.OnClickListener() {
@@ -98,6 +93,21 @@ public class ViewPrincipal extends AppCompatActivity {
         });
 
     }
+    private void refrescaVisualMural(){
+
+        DBLocalController controller = new DBLocalController(getApplicationContext());
+        ModelUser us = controller.resgata();
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("login", "login");
+        params.put("senha", "senha");
+        params.put("empresa", String.valueOf(us.getEmpresa()));
+
+        ViewPrincipal.PNRViewP request = new ViewPrincipal.PNRViewP(API.URL_mural, params,API.CODE_POST_REQUEST);
+        request.execute();
+
+
+    }
 
     private void visualMural(JSONArray array) throws JSONException {
 
@@ -113,6 +123,7 @@ public class ViewPrincipal extends AppCompatActivity {
         listView = findViewById(R.id.tdlmural);
 
         listView.setAdapter(Adapter);
+        Toast.makeText(getApplicationContext(), "Atualizado com Sucesso", Toast.LENGTH_SHORT).show();
 
 
     }

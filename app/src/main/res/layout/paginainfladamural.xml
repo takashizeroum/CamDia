@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:cardCornerRadius="30dp">
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-
     <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -37,6 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30dp"
+            android:fontFamily="@font/basic"
             android:id="@+id/nomepaginainfladamural"
             android:text="Paula S."
             android:layout_gravity="center"/>
@@ -57,11 +63,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/datapaginainfladamural"
+            android:fontFamily="@font/molengoxml"
             android:text="00/00/0000"
             android:textSize="20dp"
             android:layout_gravity="center"/>
     </LinearLayout>
 
-
-
 </LinearLayout>
+
+</androidx.cardview.widget.CardView>

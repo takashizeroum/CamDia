@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -74,12 +75,39 @@ public class ViewUser extends AppCompatActivity {
 
 
         //escutador do botão voltar
-        final ImageView btnvolt = findViewById(R.id.backbtnus);
+        final Button btnvolt = findViewById(R.id.sairbtndeuser);
         btnvolt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
                 startActivity(new Intent(getApplicationContext(), ViewPrincipal.class));
+            }
+        });
+        final Button btnperfil = findViewById(R.id.perfilbtndeuser);
+        btnperfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        final Button btnmap = findViewById(R.id.simuladorbtndeuser);
+        btnmap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                Intent go = new Intent(ViewUser.this, MapsActivity.class);
+                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.fade_in,R.anim.move_direita);
+                ActivityCompat.startActivity(ViewUser.this,go,activityOptionsCompat.toBundle());
+            }
+        });
+        final Button btmur = findViewById(R.id.muralpaginabtndeuser);
+        btmur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                Intent go = new Intent(ViewUser.this, ViewPrincipal.class);
+                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.fade_in,R.anim.move_direita);
+                ActivityCompat.startActivity(ViewUser.this,go,activityOptionsCompat.toBundle());
             }
         });
     }

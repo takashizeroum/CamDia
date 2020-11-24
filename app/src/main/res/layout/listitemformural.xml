@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:background="@drawable/bordalistitem"
-    android:id="@+id/muralmore">
+    android:id="@+id/muralmore"
+    app:cardCornerRadius="10dp"
+    android:elevation="7dp">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,9 +24,10 @@
             android:id="@+id/muralnome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/molengoxml"
             android:text="Nome.s"
-            android:textSize="15sp"
-            />
+            android:textColor="@color/Preto"
+            android:textSize="15sp" />
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -55,6 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00/00/0000"
+                android:fontFamily="@font/molengoxml"
                 android:textSize="10sp"
                 android:layout_gravity="center"
                 />

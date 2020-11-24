@@ -70,13 +70,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         listPoints = new ArrayList<LatLng>();
 
-        ImageView btnvolt = findViewById(R.id.backbtnmaps);
+
+        Button btnvolt = findViewById(R.id.sairbtndemaps);
         btnvolt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
                 Intent casa = new Intent(getApplicationContext(), ViewPrincipal.class);
                 startActivity(casa);
+            }
+        });
+        Button btnperf = findViewById(R.id.perfilbtndemaps);
+        btnperf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                Intent casa = new Intent(getApplicationContext(), ViewUser.class);
+                startActivity(casa);
+            }
+        });
+
+        Button btnmap = findViewById(R.id.simuladorbtndemaps);
+        btnmap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Mapa aberto, porfavor entre com um novo endereço ", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -91,7 +109,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Double longitude = location.getLongitude();
                 ltlatual = new LatLng(latitude, longitude);
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 10));
                 Log.d("testing", "onLocationChanged: nova lat long e´=== " + latitude.toString() + longitude.toString());
             }
         };
@@ -142,6 +160,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
                 cronometroStop();
+
             }
         });
 
@@ -150,16 +169,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-
         mMap.getUiSettings().setZoomControlsEnabled(true);
-
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST);
             Log.d("testing", "onMapReady:  mapa pronto click off");
             return;
         }
+
         mMap.setMyLocationEnabled(true);
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -174,6 +190,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
                 if (listPoints.size() == 1) {
+
+
                     mMap.addMarker(new MarkerOptions()
                             .position(latLng)
                             .title("Inicio")
@@ -183,7 +201,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     mMap.addMarker(new MarkerOptions()
                             .position(latLng)
                             .title("Chegada")
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.markflag))
+                           .icon(BitmapDescriptorFactory.fromResource(R.drawable.markflag))
                     );
                 }
 
@@ -341,8 +359,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     public class TaskRquestDirections extends AsyncTask<String, Void, String> {
-
-
         @Override
         protected String doInBackground(String... strings) {
             String responseStr = "";
@@ -352,22 +368,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 e.printStackTrace();
             }
             return responseStr;
-        }
-
-        @Override
+        }@Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             TaskParser taskParser = new TaskParser();
             taskParser.execute(s);
-
         }
     }
 
     public class TaskParser extends AsyncTask<String, Void, List<List<HashMap<String, String>>>> {
-
         @Override
         protected List<List<HashMap<String, String>>> doInBackground(String... strings) {
-
             JSONObject jsonObject = null;
             List<List<HashMap<String, String>>> routes = null;
             try {
@@ -376,9 +387,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 routes = directionsParser.parse(jsonObject);
             } catch (JSONException e) {
                 e.printStackTrace();
-            }
-
-            return routes;
+            }return routes;
         }
 
         @Override
@@ -388,15 +397,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             for (List<HashMap<String, String>> path : lists) {
                 points = new ArrayList();
                 polylineOptions = new PolylineOptions();
-
-                for (HashMap<String, String> point : path) {
+                   for (HashMap<String, String> point : path) {
                     double lat = Double.parseDouble(point.get("lat"));
                     double lon = Double.parseDouble(point.get("lng"));
-
                     points.add(new LatLng(lat, lon));
-
                 }
-
                 polylineOptions.addAll(points);
                 polylineOptions.width(15);
                 polylineOptions.color(Color.BLACK);
@@ -408,24 +413,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             } else {
                 Toast.makeText(getApplicationContext(), "Direction não encontrado", Toast.LENGTH_SHORT).show();
-                Log.d("testing", "onPostExecute: polylines ====" + polylineOptions);
-
-            }
-
-
-        }
-    }
+                }
+            }}
 
     public void cronometroStart() {
         cronometro = findViewById(R.id.mapschronometro);
         cronometro.setBase(SystemClock.elapsedRealtime());
         cronometro.start();
     }
-
     public void cronometroStop() {
         cronometro.stop();
     }
-
 
     @Override
     public void finish() {
