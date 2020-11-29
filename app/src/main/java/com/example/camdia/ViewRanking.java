@@ -55,29 +55,11 @@ public class ViewRanking extends AppCompatActivity {
             }
         });
 
-        //adapta spinner
-        spn = findViewById(R.id.frequRank);
-        ADPSpinner spinner = new ADPSpinner(spn, getApplicationContext(),R.array.escolhasSpinnerhitsRank);
+
 
     }
 
     private void visualRank(JSONArray array) throws JSONException {
-    /*  DBLocalController controller = new DBLocalController(ViewRanking.this);
-        Cursor cursor = controller.resgata();
-        if (cursor.moveToFirst()) {
-            do {listaGenerica.add(new ModelUser(
-                        cursor.getString(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getInt(4),
-                        cursor.getString(5),
-                        cursor.getInt(6),
-                        cursor.getDouble(7),
-                        cursor.getInt(8),
-                        cursor.getDouble(9)));
-            } while (cursor.moveToNext());}
-*/
 
         for (int i = 0; i < array.length(); i++) {
             JSONObject obj = array.getJSONObject(i);
@@ -121,16 +103,17 @@ public class ViewRanking extends AppCompatActivity {
             super.onPostExecute(s);
 
             try {
-
+                Log.d("testinggggggggggg", "onPostExecute: "+s);
                 final JSONObject jsonObject = new JSONObject(s);
+
                 visualRank(jsonObject.getJSONArray("users"));
-                Log.d("testinggggggggggg", "onPostExecute: "+jsonObject.getJSONArray("users"));
+
 
 
             } catch (JSONException e) {
 
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Usuario não encontrado ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Nenhum usuario não encontrado ", Toast.LENGTH_SHORT).show();
 
             }
 

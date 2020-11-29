@@ -43,7 +43,7 @@ public class ViewLogin extends AppCompatActivity {
 
         //Botões e seus listeners
         Button btnEntrar = findViewById(R.id.btnEntrar);
-        Button btnCadastrar = findViewById(R.id.btnCadastrar);
+
 
         login = findViewById(R.id.txtlogLogin);
         senha = findViewById(R.id.txtlogSenha);
@@ -52,7 +52,7 @@ public class ViewLogin extends AppCompatActivity {
             entrar();
 
         }});
-        btnCadastrar.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View view) {cadasta();}});
+
 
     }
 
@@ -78,50 +78,7 @@ public class ViewLogin extends AppCompatActivity {
 
 
 
-    //abrir formulario cadstro
-    private void cadasta() {
-        LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.cadastro, null);
 
-        final EditText cmplogin = view.findViewById(R.id.cadtxtlogin);
-        final EditText cmpnome = view.findViewById(R.id.cadtxtnome);
-        final EditText cmpsenha = view.findViewById(R.id.cadtxtSenha);
-        final EditText cmpemp = view.findViewById(R.id.cademp);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Cadastro");
-        builder.setView(view);
-        final AlertDialog dia = builder.create();
-        dia.show();
-
-        //sair form cadstro
-        view.findViewById(R.id.btnSaircad).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg) {
-                dia.dismiss();
-            }
-        });
-
-
-        //insere bd
-       view.findViewById(R.id.btncadcad).setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View arg) {
-
-                final String log = cmplogin.getText().toString();
-                final String nome = cmpnome.getText().toString();
-                final String senh= cmpsenha.getText().toString();
-                final String emp = cmpemp.getText().toString();
-
-
-
-//                DBLocalController db = new DBLocalController(getApplicationContext());
-  //              db.insereDado(new ModelUser(nome,log,emp,senh,1,"",0,10.6,1,5.3));
-
-                Toast.makeText(getApplicationContext(), "cadastrado na tabela ", Toast.LENGTH_SHORT).show();
-                dia.dismiss();
-            }
-        });
-}
 public void valida (JSONArray array) throws JSONException {
     ModelUser us = null;
 
@@ -146,7 +103,7 @@ public void valida (JSONArray array) throws JSONException {
         Intent go = new Intent(ViewLogin.this, ViewPrincipal.class);
         ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.fade_in,R.anim.move_direita);
         ActivityCompat.startActivity(ViewLogin.this,go,activityOptionsCompat.toBundle());
-        //startActivity(go);
+
 
 
 
@@ -192,7 +149,7 @@ public void valida (JSONArray array) throws JSONException {
 
                 final JSONObject jsonObject = new JSONObject(s);
                 valida(jsonObject.getJSONArray("users"));
-
+                Log.d("djsdjsdsjdhsjdhsjdhsdj", "onPostExecute: "+jsonObject);
 
 
             } catch (JSONException e) {

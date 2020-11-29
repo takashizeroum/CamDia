@@ -51,7 +51,7 @@ public class AdaptadorH extends ArrayAdapter<ModelUser> {
         TextView txtViewKm = view.findViewById(R.id.kmHist);
         TextView txtViewklf = view.findViewById(R.id.statsHist);
 
-        txtViewNome.setText(ModelUser.getNome());
+        txtViewNome.setText(ModelUser.getSenha());
         txtViewKm.setText(ModelUser.getKm().toString());
         txtViewklf.setText(ModelUser.getTempo().toString());
 

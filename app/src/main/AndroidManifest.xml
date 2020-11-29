@@ -32,6 +32,13 @@
         <activity android:name=".ViewSplash">
 
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
         </activity>
         <activity android:name=".ViewPrincipal"
             android:windowSoftInputMode="stateHidden">
@@ -56,12 +63,6 @@
             android:label="@string/title_activity_maps"
             android:windowSoftInputMode="stateHidden">
 
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
 
         </activity>

@@ -32,9 +32,7 @@ public class ViewHistorico extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historico);
 
-        //adapta spinner
-        Spinner spn = findViewById(R.id.frequenciaHist);
-        ADPSpinner spinner = new ADPSpinner(spn, getApplicationContext(),R.array.escolhasSpinnerhitsRank);
+
         DBLocalController controller = new DBLocalController(getApplicationContext());
         user = controller.resgata();
 
@@ -95,7 +93,7 @@ public class ViewHistorico extends AppCompatActivity {
         for (int i = 0; i < array.length(); i++) {
             JSONObject obj = array.getJSONObject(i);
             listar.add(new ModelUser(user.getNome(),"não utilizado", "não utilizado",
-                    "não utilizado", obj.getInt("id"), "não utilizado", 0,
+                    obj.getString("datas"), obj.getInt("id"), "não utilizado", 0,
                     obj.getDouble("km"), 0, obj.getDouble("tempo"), "não utilizado"));
 
         }

@@ -109,8 +109,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Double longitude = location.getLongitude();
                 ltlatual = new LatLng(latitude, longitude);
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 10));
-                Log.d("testing", "onLocationChanged: nova lat long e´=== " + latitude.toString() + longitude.toString());
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15));
+
             }
         };
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -129,6 +129,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 String url = getRequestUrlTx(or, de);
                 TaskRquestDirections taskRquestDirections = new TaskRquestDirections();
                 taskRquestDirections.execute(url);
+
+                findViewById(R.id.mapsformrotas).setVisibility(View.GONE);
 
             }
         });
@@ -180,7 +182,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                atualizaPosição(10000);
+
                 if (listPoints.size() == 2) {
                     listPoints.clear();
                     mMap.clear();
@@ -404,11 +406,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 polylineOptions.addAll(points);
                 polylineOptions.width(15);
-                polylineOptions.color(Color.BLACK);
+                polylineOptions.color(Color.GREEN);
                 polylineOptions.geodesic(true);
 
             }
             if (polylineOptions != null) {
+                mMap.clear();
+                atualizaPosição(3000);
                 mMap.addPolyline(polylineOptions);
 
             } else {

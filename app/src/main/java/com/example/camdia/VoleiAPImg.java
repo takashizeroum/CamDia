@@ -19,7 +19,7 @@ public class VoleiAPImg extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_volei_a_p_i);
+
 
 
     }

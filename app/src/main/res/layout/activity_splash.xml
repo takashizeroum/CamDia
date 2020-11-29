@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ViewSplash"
-    android:background="@color/colorAccent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <ImageView
@@ -22,16 +22,19 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bem Vindo!"
+        android:text="Caminhadas"
         android:textSize="50sp"
-        android:textColor="@color/colorPrimary"
+        android:fontFamily="@font/molengoxml"
+        android:textColor="@color/Preto"
         android:layout_gravity="center"/>
     <TextView
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:textColor="@color/colorPrimary"
+        android:textSize="50sp"
+        android:text="Diárias"
+        android:fontFamily="@font/molengoxml"
+        android:textColor="@color/Preto"
         android:layout_gravity="center"/>
 
 

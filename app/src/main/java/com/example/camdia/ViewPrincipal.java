@@ -111,7 +111,7 @@ public class ViewPrincipal extends AppCompatActivity {
 
     private void visualMural(JSONArray array) throws JSONException {
 
-
+        listar.clear();
         for (int i = 0; i < array.length(); i++) {
             JSONObject obj = array.getJSONObject(i);
             listar.add(new ModelUser(obj.getString("nome"),obj.getString("data"), obj.getString("msg"),
@@ -119,6 +119,7 @@ public class ViewPrincipal extends AppCompatActivity {
                     0.0, 0, 0.0,obj.getString("empresa")));
 
         }
+
         Adapter = new AdaptadorP(ViewPrincipal.this, R.layout.listitemformural, listar);
         listView = findViewById(R.id.tdlmural);
 

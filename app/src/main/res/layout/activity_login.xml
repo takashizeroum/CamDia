@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ViewLogin"
     android:orientation="vertical"
-    android:background="#F7F7F7"
+    android:background="@color/colorPrimary"
     >
 
 
@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="75dp"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/noname" />
+        android:src="@drawable/logo" />
 
     <TextView
 
@@ -69,7 +69,7 @@
             android:id="@+id/btnEntrar"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginVertical="14dp"
+            android:layout_marginVertical="70dp"
             android:paddingHorizontal="10dp"
             android:background="@drawable/botao"
             android:text="@string/entrar"
@@ -79,19 +79,7 @@
             android:textAllCaps="false"
             android:textColor="@color/colorAccent" />
 
-        <Button
-            android:fontFamily="@font/molengo"
-            android:textSize="20sp"
-            android:textAllCaps="false"
-            android:layout_marginVertical="14dp"
-            android:paddingHorizontal="10dp"
-            android:id="@+id/btnCadastrar"
-            android:drawableRight="@drawable/ic_more"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:background="@drawable/botao"
-            android:text="Cadastrar"
-            android:textColor="@color/Preto" />
+
 
 
 
